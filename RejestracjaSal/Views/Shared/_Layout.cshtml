@@ -3,13 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RejestracjaSal</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RejestracjaSal.styles.css" asp-append-version="true" />
 </head>
 <body>
-    
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a>Logo</a>
+            </div>
+            <div class="menu">
+                <a>Strona główna</a>
+                <a>Moje rezerwacje</a>
+                <a>Zaloguj/Zarejestruj</a>
+            </div>
+        </nav>
+    </header>
     @RenderBody()
 </body>
 </html>
