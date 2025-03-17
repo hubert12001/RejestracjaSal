@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RejestracjaSal", "RejestracjaSal\RejestracjaSal.csproj", "{D835FD5F-F21F-474E-A398-B59A27189023}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D835FD5F-F21F-474E-A398-B59A27189023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D835FD5F-F21F-474E-A398-B59A27189023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D835FD5F-F21F-474E-A398-B59A27189023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D835FD5F-F21F-474E-A398-B59A27189023}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4237A190-E2B0-4FC4-AA7F-58B6420F1180}
+	EndGlobalSection
+EndGlobal
