@@ -5,8 +5,15 @@
 
 
 <div class="login-container">
-    <input class="login" />
-    <input class="password" />
-    <button class="zaloguj">Zaloguj</button>
+    <h2>Zaloguj się</h2>
+    <form>
+        <label for="login" class="LogowanieLabel">Nazwa użytkownika</label>
+        <input type="text" id="username" class="login" placeholder="Wpisz nazwę użytkownika" required />
 
+        <label for="password" class="LogowanieLabel">Hasło</label>
+        <input type="password" id="password" class="password" placeholder="Wpisz hasło" required />
+
+        <button type="submit" class="zaloguj">Zaloguj</button>
+        <p>Nie masz konta? <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Rejestracja">Zarejestruj się</a></p>
+    </form>
 </div>

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Rejestracja";
+}
+
+<div class="register-container">
+    <h2>Zarejestruj się</h2>
+    <form>
+        <label for="register" class="LogowanieLabel">Nazwa użytkownika</label>
+        <input type="text" id="username" class="register" placeholder="Wpisz nazwę użytkownika" required />
+
+        <label for="regPassword" class="LogowanieLabel">Hasło</label>
+        <input type="password" id="password" class="regPassword" placeholder="Wpisz hasło" required />
+        
+        <label for="regRepeatPassword" class="LogowanieLabel">Powtórz hasło</label>
+        <input type="password" id="repeatPassword" class="regRepeatPassword" placeholder="Powtórz hasło" required />
+
+        <button type="submit" class="zarejestruj">Zarejestruj</button>
+        <p>Masz konto? <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a></p>
+    </form>
+</div>

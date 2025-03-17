@@ -1,0 +1,27 @@
+﻿:root {
+    --100: #F2A172;
+    --200: #592B1B;
+    --300: #8C4A32;
+    --400: #D9805F;
+    --500: #F2F2F2;
+}
+
+.login-container, .register-container {
+    width: 22rem;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.logowanieLabel {
+    display: block;
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+.login, .regPassword, .register {
+    margin-bottom: 10px;
+}

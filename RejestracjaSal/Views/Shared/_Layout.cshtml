@@ -4,24 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/logowanie.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <i class="fa-solid fa-house-laptop"></i>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">
+                    <i class="fa-solid fa-house-laptop"></i>
+                </a>
             </div>
             <div class="menu">
-                <a>Strona główna</a>
-                <a>Moje rezerwacje</a>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
+                <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj/Zarejestruj</a>
             </div>
         </nav>
     </header>
     @RenderBody()
 
-    <footer>
+    <footer class="footer">
         <p>© 2025 Moja Strona. Wszelkie prawa zastrzeżone!!!</p>
     </footer>
 </body>

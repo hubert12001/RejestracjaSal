@@ -13,7 +13,7 @@ namespace RejestracjaSal.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult StronaGlowna()
         {
             return View();
         }
