@@ -13,17 +13,11 @@
                 <i class="fa-solid fa-house-laptop"></i>
             </div>
             <div class="menu">
-                <div><a>Strona główna</a></div>
-                <div><a>Moje rezerwacje</a></div>
-                <div><a>Zaloguj/Zarejestruj</a></div>
+                <a>Strona główna</a>
+                <a>Moje rezerwacje</a>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj/Zarejestruj</a>
             </div>
         </nav>
-        <div class="login-container">
-            <input class="login" />
-            <input class="password"/>
-            <button class="zaloguj">Zaloguj</button>
-
-        </div>
     </header>
     @RenderBody()
 
