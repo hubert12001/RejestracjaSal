@@ -1,22 +1,54 @@
-html {
-  font-size: 14px;
+:root {
+    --100: #F2A172;
+    --200: #592B1B;
+    --300: #8C4A32;
+    --400: #D9805F;
+    --500: #F2F2F2; 
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: var(--100);
+    font-size: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 2.5rem;
+}
+
+.menu {
+    display: flex;
+    gap: 40px; /* Rozstawienie miêdzy elementami */
+    align-items: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--200);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: var(--400);
+    color: white;
+}
+
+.footer {
+    background-color: var(--200);
+    color: white;
+    padding: 20px;
 }
