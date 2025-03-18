@@ -4,17 +4,28 @@
 
 <div class="register-container">
     <h2>Zarejestruj się</h2>
-    <form>
-        <label for="register" class="LogowanieLabel">Nazwa użytkownika</label>
-        <input type="text" id="username" class="register" placeholder="Wpisz nazwę użytkownika" required />
+    <form asp-controller="Home" asp-action="Register" >
+        <label for="register" class="LogowanieLabel">Login</label>
+        <input type="text" id="username" class="register" name="login" placeholder="Wpisz nazwę użytkownika" required />
 
         <label for="regPassword" class="LogowanieLabel">Hasło</label>
-        <input type="password" id="password" class="regPassword" placeholder="Wpisz hasło" required />
+        <input type="password" id="password" class="regPassword" name="password" placeholder="Wpisz hasło" required />
         
         <label for="regRepeatPassword" class="LogowanieLabel">Powtórz hasło</label>
-        <input type="password" id="repeatPassword" class="regRepeatPassword" placeholder="Powtórz hasło" required />
+        <input type="password" id="repeatPassword" class="regRepeatPassword" name="repeatPassword" placeholder="Powtórz hasło" required />
+        
+        <label for="email" class="LogowanieLabel">Email</label>
+        <input type="email" id="email" class="register" name="email" required />
+
+        <label for="username" class="LogowanieLabel">Nazwa użytkownika</label>
+        <input type="text" id="username" class="register" name="username" required />
+
+        <label for="phone" class="LogowanieLabel">Telefon (opcjonalne)</label>
+        <input type="text" id="phone" class="register" name="phone"/>
 
         <button type="submit" class="zarejestruj">Zarejestruj</button>
         <p>Masz konto? <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a></p>
+
+        <p>@ViewBag.message</p>
     </form>
 </div>
