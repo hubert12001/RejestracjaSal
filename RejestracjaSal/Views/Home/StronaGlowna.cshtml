@@ -1,3 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Strona główna";
 }
+
+@{
+    
+    if (ViewBag.Rooms != null)
+    {
+
+        foreach (var room in ViewBag.Rooms)
+        {
+            <h1>@room.name</h1>
+            <p>@room.price</p>
+            <p>@room.capacity</p>
+            <p>@room.description</p>
+            <p>@room.type</p>
+            <p>@room.location</p>
+        
+        }
+        
+    }
+}

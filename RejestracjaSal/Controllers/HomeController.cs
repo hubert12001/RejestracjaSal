@@ -84,6 +84,26 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult StaticSites(string name)
         {
+            List<Rooms> rooms = AppDbContext.Rooms.ToList();
+
+            var query = from Rooms in AppDbContext.Rooms
+                        join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
+                        join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
+                        select new
+                        {
+                            name = Rooms.Name,
+                            price = Rooms.Room_price,
+                            capacity = Rooms.Capacity,
+                            description = Rooms.Description,
+                            type = RoomTypes.Name,
+                            location = Locations.Name,
+                        };
+            if (name == "StronaGlowna")
+            {
+                ViewBag.Rooms = query;
+            }
+
+            
             return View(name);
         }
     }
