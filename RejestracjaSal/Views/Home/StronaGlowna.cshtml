@@ -3,13 +3,15 @@
 }
 
 @{
-    
+    string img;
+
     if (ViewBag.Rooms != null)
     {
 
         foreach (var room in ViewBag.Rooms)
         {
             <h1>@room.name</h1>
+            <img src="~/Static/@room.image" />
             <p>@room.price</p>
             <p>@room.capacity</p>
             <p>@room.description</p>
