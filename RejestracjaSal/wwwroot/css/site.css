@@ -19,7 +19,8 @@ body {
     justify-content: space-between;
     padding: 15px 30px;
     background-color: var(--100);
-    font-size: 2rem;
+    font-size: 1.5rem;
+    height: 30px;
 }
 
 .logo {
@@ -92,4 +93,12 @@ input {
 
 .main-page {
     flex: 1;
+}
+
+.logoo {
+    color: var(--200)
+}
+
+.logoo:hover {
+    color: var(--500);
 }

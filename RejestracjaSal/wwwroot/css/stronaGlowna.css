@@ -1,0 +1,49 @@
+﻿.main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.search-bar {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+.filters {
+    width: 15rem;
+    background: var(--500);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.rooms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Zwiększono minimalną szerokość kolumny */
+    gap: 20px; /* Zwiększono odstęp między elementami */
+    flex: 1;
+}
+
+.room {
+    background: var(--100);
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    color: var(--200);
+    border: 2px solid var(--300); /* Dodano obramowanie */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodano cień dla lepszego efektu wizualnego */
+}
+.room h1 {
+    font-size: 1.5rem; /* Zwiększono rozmiar czcionki dla nazwy pokoju */
+    margin-bottom: 10px;
+}
+
+.room p {
+    margin: 5px 0;
+}

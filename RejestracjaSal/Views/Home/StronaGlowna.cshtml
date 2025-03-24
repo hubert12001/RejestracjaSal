@@ -2,21 +2,32 @@
     ViewData["Title"] = "Strona główna";
 }
 
-@{
-    
-    if (ViewBag.Rooms != null)
-    {
-
-        foreach (var room in ViewBag.Rooms)
-        {
-            <h1>@room.name</h1>
-            <p>@room.price</p>
-            <p>@room.capacity</p>
-            <p>@room.description</p>
-            <p>@room.type</p>
-            <p>@room.location</p>
-        
-        }
-        
-    }
-}
+<div class="main-container">
+    <div class="search-bar">
+        <input type="text" placeholder="Wyszukaj pokój...">
+    </div>
+    <div class="content">
+        <div class="filters">
+            <h3>Filtry</h3>
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+        <div class="rooms">
+            @if (ViewBag.Rooms != null)
+            {
+                foreach (var room in ViewBag.Rooms)
+                {
+                    <div class="room">
+                        <h1>@room.name</h1>
+                        <p>@room.price</p>
+                        <p>@room.location</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
