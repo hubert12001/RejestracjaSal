@@ -11,6 +11,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     width: 100%;
+    background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
 }
 
 .navbar {
@@ -31,7 +32,7 @@ body {
 
 .menu {
     display: flex;
-    gap: 40px; /* Rozstawienie miêdzy elementami */
+    gap: 40px;
     align-items: center;
 }
 
@@ -55,8 +56,6 @@ body {
     padding: 10px;
     margin-top: 15px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 

@@ -15,6 +15,7 @@ namespace RejestracjaSal.Controllers
             this.AppDbContext = appDbContext;
         }
 
+
         public IActionResult StronaGlowna()
         {
             return View();
@@ -82,13 +83,12 @@ namespace RejestracjaSal.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult StaticSites(string name)
+        public IActionResult StaticSites(string name, int pageNumber = 1, int pageSize = 12)
         {
-            List<Rooms> rooms = AppDbContext.Rooms.ToList();
-
             var query = from Rooms in AppDbContext.Rooms
                         join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
                         join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
+                        orderby Rooms.Name  // Dodano sortowanie
                         select new
                         {
                             name = Rooms.Name,
@@ -99,13 +99,24 @@ namespace RejestracjaSal.Controllers
                             type = RoomTypes.Name,
                             location = Locations.Name,
                         };
+
+            int totalRooms = query.Count();
+            int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
+
+            var pagedRooms = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
             if (name == "StronaGlowna")
             {
-                ViewBag.Rooms = query;
+                ViewBag.Rooms = pagedRooms;
+                ViewBag.CurrentPage = pageNumber;
+                ViewBag.TotalPages = totalPages;
             }
 
-            
             return View(name);
         }
+
     }
 }

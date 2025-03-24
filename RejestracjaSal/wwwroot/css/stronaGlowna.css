@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    width: 1200px;
+    margin: 40px auto;
 }
 
 .search-bar {
@@ -17,33 +19,84 @@
 
 .filters {
     width: 15rem;
-    background: var(--500);
+    background: #f4f4f4;
     padding: 15px;
     border-radius: 10px;
+    max-height: 800px;
 }
 
 .rooms {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Zwiększono minimalną szerokość kolumny */
-    gap: 20px; /* Zwiększono odstęp między elementami */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
     flex: 1;
 }
 
 .room {
-    background: var(--100);
+    background: #fafafa;
     padding: 20px;
     text-align: center;
     border-radius: 10px;
     font-weight: bold;
     color: var(--200);
-    border: 2px solid var(--300); /* Dodano obramowanie */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodano cień dla lepszego efektu wizualnego */
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .room h1 {
-    font-size: 1.5rem; /* Zwiększono rozmiar czcionki dla nazwy pokoju */
+    font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
-.room p {
+.room-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 10px;
+}
+
+.room-price, .room-location {
+    font-size: 1rem;
     margin: 5px 0;
+    color: #666;
+}
+
+.room:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    padding: 15px;
+    background: var(--100);
+    border-radius: 8px;
+}
+
+.page-link {
+    padding: 8px 16px;
+    background: var(--500);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.page-link:hover {
+    background: var(--400);
+    transform: translateY(-2px);
+}
+
+.current-page {
+    font-weight: 600;
+    color: var(--400);
 }

@@ -22,12 +22,36 @@
                 foreach (var room in ViewBag.Rooms)
                 {
                     <div class="room">
+                        <img class="room-image" src="~/Static/@room.image" />
                         <h1>@room.name</h1>
-                        <p>@room.price</p>
-                        <p>@room.location</p>
+                        <p class="room-price">@room.price</p>
+                        <p class="room-location">@room.location</p>
                     </div>
                 }
             }
         </div>
+    </div>
+    <div class="page">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a class="page-link" asp-action="StaticSites"
+               asp-route-name="StronaGlowna"
+               asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
+                Poprzednia
+            </a>
+        }
+
+        <span class="current-page">
+            Strona @ViewBag.CurrentPage z @ViewBag.TotalPages
+        </span>
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a class="page-link" asp-action="StaticSites"
+               asp-route-name="StronaGlowna"
+               asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
+                Następna
+            </a>
+        }
     </div>
 </div>
