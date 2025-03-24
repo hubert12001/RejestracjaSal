@@ -61,7 +61,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna1.png"
 
                 },
                 new Rooms()
@@ -72,7 +73,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna2.png"
 
                 },
                 new Rooms()
@@ -83,7 +85,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna3.png"
 
                 },
                 new Rooms()
@@ -94,7 +97,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna4.png"
 
                 },
                 new Rooms()
@@ -105,7 +109,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna5.png"
 
                 },
                 new Rooms()
@@ -116,7 +121,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Trzecie pietro"
+                    Description = "Trzecie pietro",
+                    Image = "sala-lekcyjna6.png"
 
                 },
                 new Rooms()
@@ -127,7 +133,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 100,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna7.png"
 
                 },
                 new Rooms()
@@ -138,7 +145,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna8.png"
 
                 },
                 new Rooms()
@@ -149,7 +157,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna9.png"
 
                 },
                 new Rooms()
@@ -160,7 +169,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 15,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna10.png"
 
                 },
                 new Rooms()
@@ -171,7 +181,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna11.png"
 
                 },
                 new Rooms()
@@ -182,7 +193,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna12.png"
 
                 },
                 new Rooms()
@@ -193,7 +205,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 65,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna13.png"
 
                 },
                 new Rooms()
@@ -204,7 +217,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 80,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna14.png"
 
                 },
                 new Rooms()
@@ -215,7 +229,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna15.png"
 
                 },
                 new Rooms()
@@ -226,7 +241,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna16.png"
 
                 },
                 new Rooms()
@@ -237,7 +253,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna17.png"
 
                 },
                 new Rooms()
@@ -248,7 +265,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 46,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna18.png"
 
                 },
                 new Rooms()
@@ -259,7 +277,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna19.png"
 
                 },
                 new Rooms()
@@ -270,7 +289,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna20.png"
 
                 },
                 new Rooms()
@@ -281,7 +301,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna21.png"
 
                 },
                 new Rooms()
@@ -292,7 +313,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna22.png"
 
                 },
                 new Rooms()
@@ -303,7 +325,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro"
+                    Description = "Pierwsze pietro",
+                    Image = "sala-lekcyjna23.png"
 
                 },
                 new Rooms()
@@ -314,7 +337,8 @@ namespace RejestracjaSal.Models
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro"
+                    Description = "Drugie pietro",
+                    Image = "sala-lekcyjna24.png"
 
                 }
             };

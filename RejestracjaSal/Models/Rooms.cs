@@ -12,5 +12,6 @@ namespace RejestracjaSal.Models
         public int Type_id { get; set; }
         public float Room_price { get; set; }
         public string? Description { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -95,6 +95,7 @@ namespace RejestracjaSal.Controllers
                             price = Rooms.Room_price,
                             capacity = Rooms.Capacity,
                             description = Rooms.Description,
+                            image = Rooms.Image,
                             type = RoomTypes.Name,
                             location = Locations.Name,
                         };
