@@ -2,7 +2,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,14 +24,20 @@
             <div class="menu">
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
                 <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
-                @if (ViewBag.name != null){
-                    <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
-                    <p>@ViewBag.name</p>
-                }
-                else
-                {
-                    <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj/Zarejestruj</a>
-                }
+                <div class="account-menu">
+                    <span class="mojeKonto">Moje konto</span>
+                    <div class="account-dropdown">
+                        @if (ViewBag.name != null)
+                        {
+                            <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a>
+                            <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Rejestracja">Załóż konto</a>
+                        }
+                    </div>
+                </div>
 
                 
             </div>
