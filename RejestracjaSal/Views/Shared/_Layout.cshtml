@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="s" asp-append-version="true" />
+    <link rel="stylesheet" href="s" asp-append-version="true" />
     <link href="~/css/logowanie.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="~/js/site.js"></script>
 </head>
@@ -19,7 +23,15 @@
             <div class="menu">
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
                 <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
-                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj/Zarejestruj</a>
+                @if (ViewBag.name != null){
+                    <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj/Zarejestruj</a>
+                }
+
+                
             </div>
         </nav>
     </header>
