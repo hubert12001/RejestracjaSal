@@ -11,6 +11,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     width: 100%;
+    background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
 }
 
 .navbar {
@@ -19,7 +20,8 @@ body {
     justify-content: space-between;
     padding: 15px 30px;
     background-color: var(--100);
-    font-size: 2rem;
+    font-size: 1.5rem;
+    height: 30px;
 }
 
 .logo {
@@ -30,7 +32,7 @@ body {
 
 .menu {
     display: flex;
-    gap: 40px; /* Rozstawienie miêdzy elementami */
+    gap: 40px;
     align-items: center;
 }
 
@@ -54,8 +56,6 @@ body {
     padding: 10px;
     margin-top: 15px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
@@ -92,4 +92,12 @@ input {
 
 .main-page {
     flex: 1;
+}
+
+.logoo {
+    color: var(--200)
+}
+
+.logoo:hover {
+    color: var(--500);
 }
