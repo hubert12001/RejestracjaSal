@@ -18,13 +18,47 @@
 }
 
 .filters {
-    width: 15rem;
+    width: 16rem;
     background: #f4f4f4;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
-    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 450px;
 }
 
+.filters label {
+    font-weight: bold;
+}
+
+.filters select, .filters input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.price-filter {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-button {
+    background: var(--100);
+    color: var(--200);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: auto;
+}
+
+.filter-button:hover {
+    background: var(--400);
+}
+    
 .rooms {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -85,15 +119,15 @@
 .page-link {
     padding: 8px 16px;
     background: var(--500);
-    color: white;
+    color: var(--200);
     border-radius: 5px;
     text-decoration: none;
     transition: background 0.3s ease;
 }
 
 .page-link:hover {
-    background: var(--400);
-    transform: translateY(-2px);
+    background-color: var(--400);
+    color: white;
 }
 
 .current-page {

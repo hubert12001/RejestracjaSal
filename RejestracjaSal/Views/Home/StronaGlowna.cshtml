@@ -9,12 +9,31 @@
     <div class="content">
         <div class="filters">
             <h3>Filtry</h3>
-            <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+            <label>Cena (od - do):</label>
+            <div class="price-filter">
+                <input type="number" placeholder="Min" min="0">
+                <input type="number" placeholder="Max" min="0">
+            </div>
+
+            <label>Lokalizacja:</label>
+            <select>
+                <option value="">Wszystkie</option>
+                <option value="gimnazjum">Gimnazjum</option>
+                <option value="inna">Inna</option>
+                <option value="inna2">Inna2</option>
             </select>
+
+            <label>Ilość miejsc:</label>
+            <input type="number" min="1" placeholder="Podaj ilość">
+
+            <label>Typ pokoju:</label>
+            <select>
+                <option value="">Wszystkie</option>
+                <option value="typ1">Typ 1</option>
+                <option value="typ2">Typ 2</option>
+            </select>
+
+            <button class="filter-button">Zastosuj</button>
         </div>
         <div class="rooms">
             @if (ViewBag.Rooms != null)
