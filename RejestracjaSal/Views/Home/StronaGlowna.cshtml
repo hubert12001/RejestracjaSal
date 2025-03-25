@@ -21,8 +21,6 @@
         <div class="rooms">
             @if (ViewBag.Rooms != null)
             {
-                <p>@HttpContextAccessor?.HttpContext?.Request.Cookies["login"]</p>
-                <p>@ViewBag.name</p>
                 foreach (var room in ViewBag.Rooms)
                 {
                     <div class="room">
