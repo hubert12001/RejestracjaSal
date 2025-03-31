@@ -101,3 +101,53 @@ input {
 .logoo:hover {
     color: var(--500);
 }
+
+.account-menu {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--200);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.account-menu:hover {
+    background-color: var(--400);
+    color: white;
+}
+
+.account-dropdown {
+    position: absolute;
+    background-color: var(--100);
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.account-dropdown a {
+    display: block;
+    padding: 10px;
+    color: var(--200);
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.account-dropdown a:hover {
+    background-color: var(--400);
+    color: white;
+
+}
+
+.account-menu:hover .account-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
