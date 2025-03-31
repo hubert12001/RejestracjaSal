@@ -26,6 +26,9 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "konto",
+    pattern: "{controller=Konto}/{action=Views/Home/StronaGlowna}/{id?}");
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=StronaGlowna}/{id?}");
 

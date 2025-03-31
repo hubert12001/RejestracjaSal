@@ -25,7 +25,7 @@
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
                 <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
                 @if (ViewBag.name != null){
-                    <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
+                    <a asp-controller="Konto" asp-action="Logout">Wyloguj</a>
                     <p>@ViewBag.name</p>
                 }
                 else
