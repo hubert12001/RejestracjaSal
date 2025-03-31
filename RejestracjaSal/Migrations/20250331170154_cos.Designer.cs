@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RejestracjaSal.Models;
 
@@ -11,9 +12,10 @@ using RejestracjaSal.Models;
 namespace RejestracjaSal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250331170154_cos")]
+    partial class cos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,7 +179,7 @@ namespace RejestracjaSal.Migrations
                             Room_id = 7,
                             Capacity = 48,
                             Description = "Jasne, przestronne pomieszczenie z dużymi oknami i stołami przystosowanymi do pracy twórczej. Sala idealna dla zajęć plastycznych, warsztatów rzemieślniczych i projektów artystycznych. Wyposażona w sztalugi, tablicę korkową i szafki na materiały.\r\n\r\n",
-                            Image = "sala-lekcyjna7.jpg",
+                            Image = "sala-lekcyjna25.jpg",
                             Location_id = 1,
                             Name = "Pracownia artystyczna",
                             Room_price = 100f,

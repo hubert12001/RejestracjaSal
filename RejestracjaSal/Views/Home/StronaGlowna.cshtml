@@ -30,7 +30,7 @@
             </select>
 
             <label>Ilość miejsc:</label>
-            <input type="number" min="1" placeholder="Podaj ilość">
+            <input class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
 
             <label>Typ pokoju:</label>
             <select>
@@ -47,10 +47,12 @@
                 foreach (var room in ViewBag.Rooms)
                 {
                     <div class="room">
-                        <img class="room-image" src="~/Static/@room.image" />
-                        <h1>@room.name</h1>
-                        <p class="room-price">@room.price</p>
-                        <p class="room-location">@room.location</p>
+                        <a asp-controller="Home" asp-action="Pokoj" asp-route-id="@room.id">
+                            <img class="room-image" src="~/Static/@room.image" />
+                            <h1>@room.name</h1>
+                            <p class="room-price">Cena: @room.price zł/h</p>
+                            <p class="room-location">@room.location</p>
+                        </a>
                     </div>
                 }
             }
