@@ -6,7 +6,11 @@
 
 <div class="main-container">
     <div class="search-bar">
-        <input type="text" placeholder="Wyszukaj pokój...">
+        <form asp-controller="Home"
+              asp-action="FindRoom">
+            <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." onchange="">
+
+        </form>
     </div>
     <div class="content">
         <div class="filters">
@@ -55,7 +59,9 @@
     <div class="page">
         @if (ViewBag.CurrentPage > 1)
         {
-            <a class="page-link" asp-action="StaticSites"
+            <a class="page-link"
+               asp-controller="Home"
+               asp-action="StaticSites"
                asp-route-name="StronaGlowna"
                asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
                 Poprzednia
@@ -68,7 +74,9 @@
 
         @if (ViewBag.CurrentPage < ViewBag.TotalPages)
         {
-            <a class="page-link" asp-action="StaticSites"
+            <a class="page-link"
+               asp-controller="Home"
+               asp-action="StaticSites"
                asp-route-name="StronaGlowna"
                asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
                 Następna
@@ -76,3 +84,14 @@
         }
     </div>
 </div>
+
+@* @section script *@
+@* { *@
+@*     <script type="text/javascript"> *@
+@*         $(document).ready(function(){ *@
+@*             $("#find").on("input", function(){ *@
+@*                 $(this).closest('form').submit(); *@
+@*             }); *@
+@*         }); *@
+@*     </script> *@
+@* } *@

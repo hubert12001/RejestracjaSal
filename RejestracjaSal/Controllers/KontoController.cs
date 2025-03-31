@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RejestracjaSal.Models;
+using System.Drawing.Printing;
 
 namespace RejestracjaSal.Controllers
 {
@@ -60,32 +61,14 @@ namespace RejestracjaSal.Controllers
                     };
                 }
 
-                var query = from Rooms in AppDbContext.Rooms
-                            join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
-                            join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
-                            orderby Rooms.Name  // Dodano sortowanie
-                            select new
-                            {
-                                name = Rooms.Name,
-                                price = Rooms.Room_price,
-                                capacity = Rooms.Capacity,
-                                description = Rooms.Description,
-                                image = Rooms.Image,
-                                type = RoomTypes.Name,
-                                location = Locations.Name,
-                            };
-                int totalRooms = query.Count();
-                int totalPages = (int)Math.Ceiling(totalRooms / (double)12);
-                var pagedRooms = query
-                    .Skip((1 - 1) * 12)
-                    .Take(12)
-                    .ToList();
-                ViewBag.Rooms = pagedRooms;
+                (object, int) pgroom = AppDbContext.GetRooms(12, 1);
+                ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = 1;
-                ViewBag.TotalPages = totalPages;
+                ViewBag.TotalPages = pgroom.Item2;
                 AppDbContext.Users.Add(newUser);
                 AppDbContext.SaveChanges();
                 Response.Cookies.Append("login", newUser.Name, options);
+                ViewBag.name = Request.Cookies["login"];
                 return View("/Views/Home/StronaGlowna.cshtml");
             }
 
@@ -102,31 +85,10 @@ namespace RejestracjaSal.Controllers
             Users users = myUsers.FirstOrDefault();
             if (myUsers.Any())
             {
-                var query = from Rooms in AppDbContext.Rooms
-                            join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
-                            join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
-                            orderby Rooms.Name  // Dodano sortowanie
-                            select new
-                            {
-                                name = Rooms.Name,
-                                price = Rooms.Room_price,
-                                capacity = Rooms.Capacity,
-                                description = Rooms.Description,
-                                image = Rooms.Image,
-                                type = RoomTypes.Name,
-                                location = Locations.Name,
-                            };
-                int totalRooms = query.Count();
-                int totalPages = (int)Math.Ceiling(totalRooms / (double)12);
-
-                var pagedRooms = query
-                    .Skip((1 - 1) * 12)
-                    .Take(12)
-                    .ToList();
-                ViewBag.Rooms = pagedRooms;
+                (object, int) pgroom = AppDbContext.GetRooms(12, 1);
+                ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = 1;
-                ViewBag.TotalPages = totalPages;
-
+                ViewBag.TotalPages = pgroom.Item2;
 
                 Response.Cookies.Append("login", users.Name, options);
 

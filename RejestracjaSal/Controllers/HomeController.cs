@@ -45,6 +45,21 @@ namespace RejestracjaSal.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult FindRoom(string find, int pageNumber = 1, int pageSize = 12)
+        {
+            string cookie = Request.Cookies["login"];
+            if (cookie != null)
+            {
+                ViewBag.name = Request.Cookies["login"];
+            }
+
+            (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find);
+            ViewBag.Rooms = pgroom.Item1;
+            ViewBag.CurrentPage = pageNumber;
+            ViewBag.TotalPages = pgroom.Item2;
+
+            return View("StronaGlowna");
+        }
         public IActionResult StaticSites(string name, int pageNumber = 1, int pageSize = 12)
         {
 
@@ -55,30 +70,10 @@ namespace RejestracjaSal.Controllers
 
             if (name == "StronaGlowna")
             {
-                var query = from Rooms in AppDbContext.Rooms
-                        join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
-                        join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
-                        orderby Rooms.Name  // Dodano sortowanie
-                        select new
-                        {
-                            name = Rooms.Name,
-                            price = Rooms.Room_price,
-                            capacity = Rooms.Capacity,
-                            description = Rooms.Description,
-                            image = Rooms.Image,
-                            type = RoomTypes.Name,
-                            location = Locations.Name,
-                        };
-            int totalRooms = query.Count();
-            int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
-
-            var pagedRooms = query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-                ViewBag.Rooms = pagedRooms;
+                (object,int) pgroom = AppDbContext.GetRooms(pageSize, pageNumber);
+                ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = pageNumber;
-                ViewBag.TotalPages = totalPages;
+                ViewBag.TotalPages = pgroom.Item2;
             }
 
             return View(name);
