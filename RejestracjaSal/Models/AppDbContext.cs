@@ -56,289 +56,289 @@ namespace RejestracjaSal.Models
                 new Rooms()
                 {
                     Room_id = 1,
-                    Name = "Sala 31",
+                    Name = "Sala dyskusyjna",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna1.png"
+                    Description = "Kameralna sala przeznaczona na seminaria, spotkania grupowe i zajęcia dydaktyczne. Układ stołów w podkowę sprzyja dyskusjom i interaktywnej pracy. Wyposażona w ekran projekcyjny, flipchart oraz system nagłośnienia.",
+                    Image = "sala-lekcyjna1.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 2,
-                    Name = "Sala 32",
+                    Name = "Pracownia językowa",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna2.png"
+                    Description = "Nowoczesna sala stworzona z myślą o nauce języków obcych. Każde stanowisko wyposażone jest w słuchawki i mikrofon, a centralny system audio umożliwia prowadzenie ćwiczeń z wymową i odsłuchami. Dodatkowo dostępna jest tablica interaktywna.\r\n\r\n",
+                    Image = "sala-lekcyjna2.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 3,
-                    Name = "Sala 33",
+                    Name = "Multimedialne laboratorium",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna3.png"
+                    Description = "Sala dostosowana do zajęć wymagających dostępu do nowoczesnych technologii. Wyposażona w komputery, tablety oraz zestawy VR, pozwala na prowadzenie interaktywnych zajęć i warsztatów. Przestrzeń modułowa umożliwia różne ustawienia stanowisk.\r\n\r\n",
+                    Image = "sala-lekcyjna3.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 4,
-                    Name = "Sala 34",
+                    Name = "Historyczna aula konferencyjna",
                     Capacity = 36,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna4.png"
+                    Description = "Stylowa sala z wysokim sufitem i zachowanymi elementami architektonicznymi dawnego gimnazjum. Idealna na wykłady, prezentacje i spotkania formalne. Oferuje duży ekran projekcyjny, drewniane ławy i oryginalne zdobienia ścian, nadające jej wyjątkowy charakter.\r\n\r\n",
+                    Image = "sala-lekcyjna4.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 5,
-                    Name = "Sala 35",
+                    Name = "Studio nagraniowe i montażowe",
                     Capacity = 16,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna5.png"
+                    Description = "Specjalistyczna sala przeznaczona dla osób zajmujących się nagrywaniem i obróbką dźwięku. Wyposażona w profesjonalny sprzęt nagraniowy, mikrofony, wygłuszone ściany oraz stanowiska montażowe. Idealna dla podcasterów, lektorów i realizatorów dźwięku.\r\n\r\n",
+                    Image = "sala-lekcyjna5.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 6,
-                    Name = "Sala 36",
+                    Name = "Przestrzeń coworkingowa\r\n",
                     Capacity = 20,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Trzecie pietro",
-                    Image = "sala-lekcyjna6.png"
+                    Description = "Nowoczesna, otwarta sala dostosowana do pracy zespołowej i indywidualnej. Wyposażona w biurka, wygodne fotele oraz liczne punkty zasilania. Dostępna szybka sieć Wi-Fi, tablica magnetyczna oraz kącik relaksu z sofą i ekspresem do kawy.\r\n\r\n",
+                    Image = "sala-lekcyjna6.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 7,
-                    Name = "Sala 21",
+                    Name = "Pracownia artystyczna",
                     Capacity = 48,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 100,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna7.png"
+                    Description = "Jasne, przestronne pomieszczenie z dużymi oknami i stołami przystosowanymi do pracy twórczej. Sala idealna dla zajęć plastycznych, warsztatów rzemieślniczych i projektów artystycznych. Wyposażona w sztalugi, tablicę korkową i szafki na materiały.\r\n\r\n",
+                    Image = "sala-lekcyjna7.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 8,
-                    Name = "Sala 22",
+                    Name = "Sala wykładowa z komputerami\r\n",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna8.png"
+                    Description = "Nowoczesna sala z układem amfiteatralnym, idealna do prowadzenia wykładów, prelekcji i prezentacji. Wyposażona w projektor, ekran oraz stanowiska komputerowe, które umożliwiają interaktywne zajęcia. Wysokie okna zapewniają doskonałe doświetlenie naturalnym światłem.\r\n\r\n",
+                    Image = "sala-lekcyjna8.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 9,
-                    Name = "Sala 23",
+                    Name = "Sala spotkań seminaryjnych",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna9.png"
+                    Description = "Kameralna sala, która doskonale sprawdza się w roli miejsca do przeprowadzania seminariów, spotkań dyskusyjnych i zajęć w mniejszych grupach. Wyposażona w projektor, ekran oraz komfortowe krzesła i stoły, które można dowolnie ustawiać w zależności od potrzeb.\r\n\r\n",
+                    Image = "sala-lekcyjna9.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 10,
-                    Name = "Sala 24",
+                    Name = "Pracownia biologiczna",
                     Capacity = 10,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 15,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna10.png"
+                    Description = "Sala specjalistyczna, przystosowana do zajęć laboratoryjnych z zakresu biologii. Wyposażona w stoły laboratoryjne, mikroskopy, szafy na odczynniki oraz system wentylacyjny. Idealna do przeprowadzania eksperymentów, badań i analiz.\r\n\r\n",
+                    Image = "sala-lekcyjna10.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 11,
-                    Name = "Sala 25",
+                    Name = "Sala projektowa z tablicą interaktywną\r\n",
                     Capacity = 18,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna11.png"
+                    Description = "Idealna do spotkań projektowych i burz mózgów. Sala wyposażona w nowoczesną tablicę interaktywną, rzutnik oraz stoliki do pracy grupowej. Przestronna, z dużą ilością światła dziennego, sprzyja kreatywnej pracy i efektywnej wymianie pomysłów.\r\n\r\n",
+                    Image = "sala-lekcyjna11.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 12,
-                    Name = "Sala 26",
+                    Name = "Pracownia chemiczna",
                     Capacity = 18,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 35,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna12.png"
+                    Description = "Dobrze wyposażona sala laboratoryjna, przeznaczona do zajęć chemicznych. Posiada specjalistyczne stoły z dostępem do wody, gazu i prądu, a także szafy na odczynniki chemiczne. Świetnie nadaje się do przeprowadzania eksperymentów i badań chemicznych.\r\n\r\n",
+                    Image = "sala-lekcyjna12.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 13,
-                    Name = "Sala 27",
+                    Name = "Sala dydaktyczna z układem kinowym\r\n",
                     Capacity = 30,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 65,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna13.png"
+                    Description = "Aula z ustawieniem w układzie kinowym, idealna na projekcje filmowe, wykłady lub szkolenia. Posiada duży ekran, projektor, system nagłośnienia i komfortowe fotele. Doskonałe miejsce do nauki z elementami multimedialnymi.\r\n\r\n",
+                    Image = "sala-lekcyjna13.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 14,
-                    Name = "Sala 28",
+                    Name = "Sala komputerowa z dostępem do internetu",
                     Capacity = 36,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 80,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna14.png"
+                    Description = "W pełni wyposażona sala komputerowa z dostępem do internetu. Każde stanowisko ma zainstalowane oprogramowanie edukacyjne, co czyni ją idealnym miejscem do zajęć informatycznych, szkoleń i warsztatów praktycznych. Sala jest przestronna i dobrze doświetlona.\r\n\r\n",
+                    Image = "sala-lekcyjna14.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 15,
-                    Name = "Sala 11",
+                    Name = "Klasyczna aula wykładowa",
                     Capacity = 36,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna15.png"
+                    Description = "Przestronna aula o klasycznym układzie, idealna na wykłady, seminaria i konferencje. Pomieszczenie wyposażone jest w projektor, duży ekran oraz nagłośnienie. Wysokie okna zapewniają dużo naturalnego światła, a zabytkowe drewniane ławki dodają wyjątkowego klimatu.\r\n\r\n",
+                    Image = "sala-lekcyjna15.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 16,
-                    Name = "Sala 12",
+                    Name = "Kameralna sala warsztatowa",
                     Capacity = 18,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna16.png"
+                    Description = "Średniej wielkości sala doskonała na warsztaty, spotkania i zajęcia w mniejszych grupach. Wyposażona w tablicę suchościeralną, rzutnik oraz ruchome stoły i krzesła, umożliwiające dowolną aranżację przestrzeni. Klimatyczna ceglana ściana przypomina o historii budynku.\r\n\r\n",
+                    Image = "sala-lekcyjna16.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 17,
-                    Name = "Sala 13",
+                    Name = "Nowoczesna sala komputerowa",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro",
+                    Description = "Przystosowana do zajęć informatycznych sala z nowoczesnym sprzętem. Każde stanowisko wyposażone jest w komputer z szybkim dostępem do internetu. Dodatkowo sala oferuje tablicę interaktywną oraz ergonomiczne krzesła zapewniające komfort nawet podczas dłuższych zajęć.\r\n\r\n",
                     Image = "sala-lekcyjna17.png"
 
                 },
                 new Rooms()
                 {
                     Room_id = 18,
-                    Name = "Sala 14",
+                    Name = "Przestrzeń kreatywna",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 46,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna18.png"
+                    Description = "Nowoczesna sala przystosowana do spotkań projektowych i kreatywnych sesji. Posiada wygodne fotele, stoły konferencyjne oraz ściany pokryte farbą suchościeralną, umożliwiającą zapisywanie pomysłów. Dobre oświetlenie i industrialny charakter wnętrza sprzyjają twórczej pracy.",
+                    Image = "sala-lekcyjna18.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 19,
-                    Name = "Sala 15",
+                    Name = "Sala konferencyjna z widokiem na dziedziniec",
                     Capacity = 28,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 75,
-                    Description = "Pierwsze pietro",
+                    Description = "Elegancka, przestronna sala idealna na zebrania, prelekcje i spotkania biznesowe. Duże okna wychodzą na wewnętrzny dziedziniec, zapewniając piękny widok i dużo światła dziennego. Pomieszczenie wyposażone jest w ekran, projektor oraz system nagłośnienia.",
                     Image = "sala-lekcyjna19.png"
 
                 },
                 new Rooms()
                 {
                     Room_id = 20,
-                    Name = "Sala 16",
+                    Name = "Sala konferencyjna z telebimem",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna20.png"
+                    Description = "Elegancka sala konferencyjna, wyposażona w duży telebim oraz system audio. Doskonała do przeprowadzania prezentacji, spotkań biznesowych i konferencji. Wysokiej jakości wykończenia wnętrz oraz wygodne fotele zapewniają komfort podczas długotrwałych spotkań.\r\n\r\n",
+                    Image = "sala-lekcyjna20.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 21,
-                    Name = "Sala 17",
+                    Name = "Pracownia plastyczna z przestrzenią do malowania\r\n",
                     Capacity = 12,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna21.png"
+                    Description = "Przestronna sala z dużymi oknami, idealna dla osób zajmujących się sztuką. Wyposażona w sztalugi, stoły do malowania i drewno do rzeźbienia. Świetna do zajęć z zakresu malarstwa, rzeźby i innych dziedzin plastycznych.\r\n\r\n",
+                    Image = "sala-lekcyjna21.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 22,
-                    Name = "Sala 18",
+                    Name = "Sala wykładowa z klimatyzacją",
                     Capacity = 12,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 25,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna22.png"
+                    Description = "Elegancka sala wykładowa o przestronnym układzie, wyposażona w projektor, ekran, system audio i klimatyzację. Wysokie sufity oraz przestronność sprawiają, że jest to doskonałe miejsce na większe wykłady, seminaria i kursy.\r\n\r\n",
+                    Image = "sala-lekcyjna22.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 23,
-                    Name = "Sala 19",
+                    Name = "Sala laboratoryjna fizyczna\r\n",
                     Capacity = 12,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Pierwsze pietro",
-                    Image = "sala-lekcyjna23.png"
+                    Description = "Sala z odpowiednim wyposażeniem do przeprowadzania eksperymentów z zakresu fizyki. Posiada stoły do eksperymentów, pomoce dydaktyczne oraz szafy do przechowywania sprzętu i materiałów. Idealna do naukowych zajęć praktycznych.\r\n\r\n",
+                    Image = "sala-lekcyjna23.jpg"
 
                 },
                 new Rooms()
                 {
                     Room_id = 24,
-                    Name = "Sala 20",
+                    Name = "Pracownia matematyczna",
                     Capacity = 24,
                     Location_id = 1,
                     Type_id = 1,
                     Room_price = 50,
-                    Description = "Drugie pietro",
-                    Image = "sala-lekcyjna24.png"
+                    Description = "Nowoczesna sala, idealna do zajęć matematycznych, posiadająca tablicę interaktywną, projektor oraz ergonomiczne krzesła i biurka. Świetna do prowadzenia wykładów, ćwiczeń i rozwiązywania zadań matematycznych w grupach.\r\n\r\n",
+                    Image = "sala-lekcyjna24.jpg"
 
                 }
             };

@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="s" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css"/>  
     <link href="~/css/logowanie.css" rel="stylesheet" />
-    <link href="~/css/stronaGlowna.css" rel="stylesheet"/>
+    <link href="~/css/stronaGlowna.css" rel="stylesheet" />
+    <link href="~/css/pokoj.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="~/js/site.js"></script>
 </head>
@@ -25,18 +26,22 @@
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
                 <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
                 <div class="account-menu">
-                    <span class="mojeKonto">Moje konto</span>
-                    <div class="account-dropdown">
+
                         @if (ViewBag.name != null)
                         {
-                            <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
+                            <span class="mojeKonto">@ViewBag.name</span>
+                            <div class="account-dropdown">
+                                <a asp-controller="Home" asp-action="Logout">Wyloguj</a>
+                            </div>
                         }
                         else
                         {
-                            <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a>
-                            <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Rejestracja">Załóż konto</a>
+                            <span class="mojeKonto">Moje konto</span>
+                            <div class="account-dropdown">
+                                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a>
+                                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Rejestracja">Załóż konto</a>
+                            </div>
                         }
-                    </div>
                 </div>
 
                 
