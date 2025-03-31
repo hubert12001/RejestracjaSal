@@ -1,0 +1,124 @@
+﻿.room-details {
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.room-header {
+    position: relative;
+    text-align: center;
+}
+
+.room-header h1 {
+    margin: 20px 0;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.room-gallery {
+    position: relative;
+}
+
+.main-image {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 10px;
+}
+
+
+.room-info {
+    padding: 20px;
+}
+
+.description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.room-parameters p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #444;
+}
+
+.amenities {
+    margin-top: 20px;
+}
+
+.amenities h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.amenities ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.amenities li {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.amenities li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+}
+
+.booking-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.booking-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.booking-section input[type="date"] {
+    padding: 10px;
+    font-size: 1.1rem;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.reserve-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
+.navigation-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link {
+    font-size: 1.1rem;
+    color: var(--300);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--200);
+}

@@ -1,0 +1,38 @@
+﻿@if (ViewBag.Room != null)
+{
+    <div class="room-details">
+        <div class="room-header">
+            <h1>@ViewBag.Room.name</h1>
+            <div class="room-gallery">
+                <img src="~/Static/@ViewBag.Room.image" class="main-image" />
+
+            </div>
+        </div>
+        <div class="room-info">
+            <p class="description">@ViewBag.Room.description</p>
+            <div class="room-parameters">
+                <p><strong>Cena:</strong> @ViewBag.Room.price PLN za godzinę</p>
+                <p><strong>Lokalizacja:</strong> @ViewBag.Room.location</p>
+                <p><strong>Pojemność:</strong> @ViewBag.Room.capacity osób</p>
+            </div>
+            <div class="amenities">
+                <h3>Udogodnienia:</h3>
+                <ul>
+                    <li>Bezpłatne Wi-Fi</li>
+                    <li>Klimatyzacja</li>
+                    <li>Projektor</li>
+                    <li>Tablica</li>
+                    <li>Łazienka</li>
+                </ul>
+            </div>
+            <div class="booking-section">
+                <h3>Wybierz date rezerwacji:</h3>
+                <input type="date">
+                <button class="reserve-button">Zarezerwuj</button>
+            </div>
+            <div class="navigation-links">
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna" class="back-link">Powrót do strony głównej</a>
+            </div>
+        </div>
+    </div>
+}

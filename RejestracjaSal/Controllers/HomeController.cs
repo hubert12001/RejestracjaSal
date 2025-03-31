@@ -79,5 +79,31 @@ namespace RejestracjaSal.Controllers
             return View(name);
         }
 
+        public IActionResult Pokoj(int id)
+        {
+            var room = (from Rooms in AppDbContext.Rooms
+                        join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
+                        join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
+                        where Rooms.Room_id == id
+                        select new
+                        {
+                            name = Rooms.Name,
+                            price = Rooms.Room_price,
+                            capacity = Rooms.Capacity,
+                            description = Rooms.Description,
+                            image = Rooms.Image,
+                            type = RoomTypes.Name,
+                            location = Locations.Name,
+                        }).FirstOrDefault();
+
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Room = room;
+            return View("Pokoj");
+        }
+
     }
 }
