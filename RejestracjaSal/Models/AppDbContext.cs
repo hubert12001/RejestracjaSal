@@ -16,11 +16,50 @@ namespace RejestracjaSal.Models
         }
         public (object, int) FindRooms(int pageSize, int pageNumber, string find)
         {
-            var query = from rooms in Rooms 
+            var query = from rooms in Rooms
                         join roomTypes in RoomTypes on rooms.Type_id equals roomTypes.Type_id
                         join locations in Locations on rooms.Location_id equals locations.Location_id
                         where rooms.Name.Trim().ToLower().Contains(find.ToLower().Trim())
-                        orderby rooms.Name  // Dodano sortowanie
+                        orderby rooms.Name
+                        select new
+                        {
+                            id = rooms.Room_id,
+                            name = rooms.Name,
+                            price = rooms.Room_price,
+                            capacity = rooms.Capacity,
+                            description = rooms.Description,
+                            image = rooms.Image,
+                            type = roomTypes.Name,
+                            location = locations.Name,
+                        };            
+            int totalRooms = query.Count();
+            int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
+            var pagedRooms = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            (object, int) result = (pagedRooms, totalPages);
+            return result;
+        }
+        public (object, int) FindRooms(int pageSize, int pageNumber, string find, int min, int max, string local, int capacity, string type)
+        {
+            //var query = Rooms
+            //.Join(RoomTypes, rooms => rooms.Type_id, roomTypes => roomTypes.Type_id, (rooms, roomTypes) => new { rooms, roomTypes })
+            //.Join(Locations, combined => combined.rooms.Location_id, locations => locations.Location_id, (combined, locations) => new
+            //{
+            //    id = combined.rooms.Room_id,
+            //    name = combined.rooms.Name,
+            //    price = combined.rooms.Room_price,
+            //    capacity = combined.rooms.Capacity,
+            //    description = combined.rooms.Description,
+            //    image = combined.rooms.Image,
+            //    type = combined.roomTypes.Name,
+            //    location = locations.Name,
+            //})
+            //.OrderBy(r => r.name);
+            var query = from rooms in Rooms
+                        join roomTypes in RoomTypes on rooms.Type_id equals roomTypes.Type_id
+                        join locations in Locations on rooms.Location_id equals locations.Location_id
                         select new
                         {
                             id = rooms.Room_id,
@@ -32,6 +71,28 @@ namespace RejestracjaSal.Models
                             type = roomTypes.Name,
                             location = locations.Name,
                         };
+            if (!String.IsNullOrEmpty(find))
+            {
+                query = query.Where(r => r.name.Trim().ToLower().Contains(find.Trim().ToLower()));
+
+            }
+            if (min >= 0 && max > 0)
+            {
+                query = query.Where(r => r.price >= min && r.price <= max);
+            }
+            if (!String.IsNullOrEmpty(local))
+            {
+                query = query.Where(r => r.location.Trim().ToLower().Contains(local.Trim().ToLower()));  
+            }
+            if (capacity >= 0)
+            {
+                query = query.Where(r => r.capacity >= capacity);
+            }
+            if (!String.IsNullOrEmpty(type)) 
+            { 
+                query =query.Where(r => r.type.Trim().ToLower().Contains(type.Trim().ToLower()));
+            }
+
             int totalRooms = query.Count();
             int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
             var pagedRooms = query
@@ -41,7 +102,6 @@ namespace RejestracjaSal.Models
             (object, int) result = (pagedRooms, totalPages);
             return result;
         }
-
         public (object,int) GetRooms(int pageSize, int pageNumber)
         {
             var query = from rooms in Rooms
@@ -106,6 +166,11 @@ namespace RejestracjaSal.Models
                 {
                     Type_id = 1,
                     Name = "Sala naukowa"
+                },
+                new RoomTypes()
+                {
+                    Type_id = 2,
+                    Name = "Sala komercyjna"
                 }
             };
             List<Rooms> rooms = new List<Rooms>
@@ -164,7 +229,7 @@ namespace RejestracjaSal.Models
                     Name = "Studio nagraniowe i montażowe",
                     Capacity = 16,
                     Location_id = 1,
-                    Type_id = 1,
+                    Type_id = 2,
                     Room_price = 25,
                     Description = "Specjalistyczna sala przeznaczona dla osób zajmujących się nagrywaniem i obróbką dźwięku. Wyposażona w profesjonalny sprzęt nagraniowy, mikrofony, wygłuszone ściany oraz stanowiska montażowe. Idealna dla podcasterów, lektorów i realizatorów dźwięku.\r\n\r\n",
                     Image = "sala-lekcyjna5.jpg"
@@ -176,7 +241,7 @@ namespace RejestracjaSal.Models
                     Name = "Przestrzeń coworkingowa\r\n",
                     Capacity = 20,
                     Location_id = 1,
-                    Type_id = 1,
+                    Type_id = 2,
                     Room_price = 35,
                     Description = "Nowoczesna, otwarta sala dostosowana do pracy zespołowej i indywidualnej. Wyposażona w biurka, wygodne fotele oraz liczne punkty zasilania. Dostępna szybka sieć Wi-Fi, tablica magnetyczna oraz kącik relaksu z sofą i ekspresem do kawy.\r\n\r\n",
                     Image = "sala-lekcyjna6.jpg"

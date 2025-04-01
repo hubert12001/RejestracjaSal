@@ -45,15 +45,15 @@ namespace RejestracjaSal.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult FindRoom(string find, int pageNumber = 1, int pageSize = 12)
+        public IActionResult FindRoom(string find, int min, int max, string local, int capacity, string type, int pageNumber = 1, int pageSize = 12)
         {
             string cookie = Request.Cookies["login"];
             if (cookie != null)
             {
                 ViewBag.name = Request.Cookies["login"];
             }
-
-            (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find);
+            Console.WriteLine($"To jest lokal{local}");
+            (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find, min, max, local, capacity, type);
             ViewBag.Rooms = pgroom.Item1;
             ViewBag.CurrentPage = pageNumber;
             ViewBag.TotalPages = pgroom.Item2;

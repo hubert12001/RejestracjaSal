@@ -5,42 +5,40 @@
 }
 
 <div class="main-container">
-    <div class="search-bar">
-        <form asp-controller="Home"
-              asp-action="FindRoom">
-            <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." onchange="">
+    <form asp-controller="Home"asp-action="FindRoom">
+        <div class="search-bar">
+                <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." onchange="">
 
-        </form>
-    </div>
-    <div class="content">
-        <div class="filters">
-            <h3>Filtry</h3>
-            <label>Cena (od - do):</label>
-            <div class="price-filter">
-                <input type="number" placeholder="Min" min="0">
-                <input type="number" placeholder="Max" min="0">
-            </div>
-
-            <label>Lokalizacja:</label>
-            <select>
-                <option value="">Wszystkie</option>
-                <option value="gimnazjum">Gimnazjum</option>
-                <option value="inna">Inna</option>
-                <option value="inna2">Inna2</option>
-            </select>
-
-            <label>Ilość miejsc:</label>
-            <input class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
-
-            <label>Typ pokoju:</label>
-            <select>
-                <option value="">Wszystkie</option>
-                <option value="typ1">Typ 1</option>
-                <option value="typ2">Typ 2</option>
-            </select>
-
-            <button class="filter-button">Zastosuj</button>
+        
         </div>
+        <div class="content">
+            <div class="filters">
+                <h3>Filtry</h3>
+                    <label>Cena (od - do):</label>
+                    <div class="price-filter">
+                        <input name="min" type="number" placeholder="Min" min="0">
+                        <input name="max" type="number" placeholder="Max" min="0">
+                    </div>
+
+                    <label>Lokalizacja:</label>
+                    <select name="local">
+                        <option value="" selected>Wszystkie</option>
+                        <option value="gimnazjum">Gimnazjum</option>
+                    </select>
+
+                    <label>Ilość miejsc:</label>
+                    <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
+
+                    <label>Typ pokoju:</label>
+                    <select name="type">
+                        <option value="" selected>Wszystkie</option>
+                        <option value="sala naukowa">Sala naukowa</option>
+                        <option value="sala komercyjna">Sala komercyjna</option>
+                    </select>
+                    <button type="submit" class="filter-button">Zastosuj</button>
+            
+            </div>
+    </form>
         <div class="rooms">
             @if (ViewBag.Rooms != null)
             {
@@ -63,8 +61,7 @@
         {
             <a class="page-link"
                asp-controller="Home"
-               asp-action="StaticSites"
-               asp-route-name="StronaGlowna"
+               asp-action="FindRoom"
                asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
                 Poprzednia
             </a>
@@ -78,22 +75,10 @@
         {
             <a class="page-link"
                asp-controller="Home"
-               asp-action="StaticSites"
-               asp-route-name="StronaGlowna"
+               asp-action="FindRoom"
                asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
                 Następna
             </a>
         }
     </div>
 </div>
-
-@* @section script *@
-@* { *@
-@*     <script type="text/javascript"> *@
-@*         $(document).ready(function(){ *@
-@*             $("#find").on("input", function(){ *@
-@*                 $(this).closest('form').submit(); *@
-@*             }); *@
-@*         }); *@
-@*     </script> *@
-@* } *@
