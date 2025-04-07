@@ -69,6 +69,11 @@ namespace RejestracjaSal.Controllers
                 AppDbContext.SaveChanges();
                 Response.Cookies.Append("login", newUser.Name, options);
                 ViewBag.name = Request.Cookies["login"];
+
+                List<string> types = AppDbContext.GetTypes();
+                List<string> locations = AppDbContext.GetLocations();
+                ViewBag.RoomTypes = types;
+                ViewBag.Locations = locations;
                 return View("/Views/Home/StronaGlowna.cshtml");
             }
 
@@ -93,6 +98,11 @@ namespace RejestracjaSal.Controllers
                 Response.Cookies.Append("login", users.Name, options);
 
                 ViewBag.name = users.Name;
+
+                List<string> types = AppDbContext.GetTypes();
+                List<string> locations = AppDbContext.GetLocations();
+                ViewBag.RoomTypes = types;
+                ViewBag.Locations = locations;
                 return View("/Views/Home/StronaGlowna.cshtml");
             }
             else
@@ -111,6 +121,10 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult StronaGlowna()
         {
+            List<string> types = AppDbContext.GetTypes();
+            List<string> locations = AppDbContext.GetLocations();
+            ViewBag.RoomTypes = types;
+            ViewBag.Locations = locations;
             return View("/Views/Home/StronaGlowna.cshtml");
         }
     }
