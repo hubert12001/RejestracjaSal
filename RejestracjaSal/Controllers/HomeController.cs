@@ -34,6 +34,16 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult StronaGlowna()
         {
+            List<string> types = AppDbContext.GetTypes();
+            List<string> locations = AppDbContext.GetLocations();
+            (object, int) pgroom = AppDbContext.FindRooms(12,1);
+
+            ViewBag.Rooms = pgroom.Item1;
+            ViewBag.CurrentPage = 1;
+            ViewBag.TotalPages = pgroom.Item2;
+            ViewBag.RoomTypes = types;
+            ViewBag.Locations = locations;
+
             return View();
         }
 
@@ -54,9 +64,24 @@ namespace RejestracjaSal.Controllers
             }
             Console.WriteLine($"To jest lokal{local}");
             (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find, min, max, local, capacity, type);
+            
+            Dictionary<string,string> filerMap = new Dictionary<string,string>();
+            filerMap.Add("find", find);
+            filerMap.Add("cenaMin", min.ToString());
+            filerMap.Add("cenaMax", max.ToString());
+            filerMap.Add("local", local);
+            filerMap.Add("capacity", capacity.ToString());
+            filerMap.Add("type", type);
+
             ViewBag.Rooms = pgroom.Item1;
             ViewBag.CurrentPage = pageNumber;
             ViewBag.TotalPages = pgroom.Item2;
+            ViewBag.Filters = filerMap;
+
+            List<string> types = AppDbContext.GetTypes();
+            List<string> locations = AppDbContext.GetLocations();
+            ViewBag.RoomTypes = types;
+            ViewBag.Locations = locations;
 
             return View("StronaGlowna");
         }
@@ -70,11 +95,16 @@ namespace RejestracjaSal.Controllers
 
             if (name == "StronaGlowna")
             {
-                (object,int) pgroom = AppDbContext.GetRooms(pageSize, pageNumber);
+                (object,int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber);
                 ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = pageNumber;
                 ViewBag.TotalPages = pgroom.Item2;
+                List<string> types = AppDbContext.GetTypes();
+                List<string> locations = AppDbContext.GetLocations();
+                ViewBag.RoomTypes = types;
+                ViewBag.Locations = locations;
             }
+
 
             return View(name);
         }
@@ -100,6 +130,7 @@ namespace RejestracjaSal.Controllers
             {
                 return NotFound();
             }
+
 
             ViewBag.Room = room;
             return View("Pokoj");

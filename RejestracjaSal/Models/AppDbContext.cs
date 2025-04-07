@@ -14,49 +14,11 @@ namespace RejestracjaSal.Models
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
-        public (object, int) FindRooms(int pageSize, int pageNumber, string find)
+        
+        public (object, int) FindRooms(int pageSize, int pageNumber, string find = "",
+                                       int min = 0, int max = 0, string local = "", 
+                                       int capacity = 0, string type = "")
         {
-            var query = from rooms in Rooms
-                        join roomTypes in RoomTypes on rooms.Type_id equals roomTypes.Type_id
-                        join locations in Locations on rooms.Location_id equals locations.Location_id
-                        where rooms.Name.Trim().ToLower().Contains(find.ToLower().Trim())
-                        orderby rooms.Name
-                        select new
-                        {
-                            id = rooms.Room_id,
-                            name = rooms.Name,
-                            price = rooms.Room_price,
-                            capacity = rooms.Capacity,
-                            description = rooms.Description,
-                            image = rooms.Image,
-                            type = roomTypes.Name,
-                            location = locations.Name,
-                        };            
-            int totalRooms = query.Count();
-            int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
-            var pagedRooms = query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-            (object, int) result = (pagedRooms, totalPages);
-            return result;
-        }
-        public (object, int) FindRooms(int pageSize, int pageNumber, string find, int min, int max, string local, int capacity, string type)
-        {
-            //var query = Rooms
-            //.Join(RoomTypes, rooms => rooms.Type_id, roomTypes => roomTypes.Type_id, (rooms, roomTypes) => new { rooms, roomTypes })
-            //.Join(Locations, combined => combined.rooms.Location_id, locations => locations.Location_id, (combined, locations) => new
-            //{
-            //    id = combined.rooms.Room_id,
-            //    name = combined.rooms.Name,
-            //    price = combined.rooms.Room_price,
-            //    capacity = combined.rooms.Capacity,
-            //    description = combined.rooms.Description,
-            //    image = combined.rooms.Image,
-            //    type = combined.roomTypes.Name,
-            //    location = locations.Name,
-            //})
-            //.OrderBy(r => r.name);
             var query = from rooms in Rooms
                         join roomTypes in RoomTypes on rooms.Type_id equals roomTypes.Type_id
                         join locations in Locations on rooms.Location_id equals locations.Location_id
@@ -102,33 +64,22 @@ namespace RejestracjaSal.Models
             (object, int) result = (pagedRooms, totalPages);
             return result;
         }
-        public (object,int) GetRooms(int pageSize, int pageNumber)
-        {
-            var query = from rooms in Rooms
-                        join roomTypes in RoomTypes on rooms.Type_id equals roomTypes.Type_id
-                        join locations in Locations on rooms.Location_id equals locations.Location_id
-                        orderby rooms.Name  // Dodano sortowanie
-                        select new
-                        {
-                            id = rooms.Room_id,
-                            name = rooms.Name,
-                            price = rooms.Room_price,
-                            capacity = rooms.Capacity,
-                            description = rooms.Description,
-                            image = rooms.Image,
-                            type = roomTypes.Name,
-                            location = locations.Name,
-                        };
 
-            int totalRooms = query.Count();
-            int totalPages = (int)Math.Ceiling(totalRooms / (double)pageSize);
-            var pagedRooms = query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-            (object, int) result = (pagedRooms, totalPages);
-            return result;
+        public List<string> GetTypes()
+        {
+            var query = from roomTypes in RoomTypes select roomTypes.Name;
+
+            return query.ToList();
+        }        
+        public List<string> GetLocations()
+        {
+            var query = from locations in Locations select locations.Name;
+            List<string> l = new List<string>();
+
+            return query.ToList();
         }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -61,7 +61,7 @@ namespace RejestracjaSal.Controllers
                     };
                 }
 
-                (object, int) pgroom = AppDbContext.GetRooms(12, 1);
+                (object, int) pgroom = AppDbContext.FindRooms(12, 1);
                 ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = 1;
                 ViewBag.TotalPages = pgroom.Item2;
@@ -85,7 +85,7 @@ namespace RejestracjaSal.Controllers
             Users users = myUsers.FirstOrDefault();
             if (myUsers.Any())
             {
-                (object, int) pgroom = AppDbContext.GetRooms(12, 1);
+                (object, int) pgroom = AppDbContext.FindRooms(12, 1);
                 ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = 1;
                 ViewBag.TotalPages = pgroom.Item2;

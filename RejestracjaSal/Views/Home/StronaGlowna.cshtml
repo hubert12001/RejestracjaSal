@@ -7,35 +7,128 @@
 <div class="main-container">
     <form asp-controller="Home"asp-action="FindRoom">
         <div class="search-bar">
-                <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." onchange="">
+            @if(ViewBag.Filters != null)
+            {
+                <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." value=@ViewBag.Filters["find"] onchange="">
 
-        
+            }
+            else
+            {
+                <input id="find" name="find" type="text" placeholder="Wyszukaj pokój..." onchange="">
+            }
+
+
         </div>
         <div class="content">
             <div class="filters">
-                <h3>Filtry</h3>
+                @if (ViewBag.Filters != null)
+                {
+                    <h3>Filtry</h3>
                     <label>Cena (od - do):</label>
                     <div class="price-filter">
-                        <input name="min" type="number" placeholder="Min" min="0">
+                        <input name="min" type="number" placeholder="Min" min="0" value=@ViewBag.Filters["cenaMin"]>
+                        <input name="max" type="number" placeholder="Max" min="0" value=@ViewBag.Filters["cenaMax"]>
+                    </div>
+
+                    <label>Lokalizacja:</label>
+                    <select name="local">
+                        @if(ViewBag.Filters["local"]!="")
+                        {
+                            <option value="">Wszystkie</option>
+                            @foreach (var l in ViewBag.Locations)
+                            {
+                                if (ViewBag.Filters["local"] == l)
+                                {
+                                    <option value=@l selected>@l</option>
+
+                                }
+                                else
+                                {
+                                    <option value=@l>@l</option>
+                                    
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            <option value="" selected>Wszystkie</option>
+                            @foreach (var l in ViewBag.Locations)
+                            {
+                                <option value=@l>@l</option>
+                            }
+                            
+                        }
+                    </select>
+
+                    <label>Ilość miejsc:</label>
+                    <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość" value=@ViewBag.Filters["capacity"]>
+
+                    <label>Typ pokoju:</label>
+                    <select name="type">
+                        @if (ViewBag.Filters["type"] != "")
+                        {
+                            <option value="">Wszystkie</option>
+                            @foreach (var l in ViewBag.RoomTypes)
+                            {
+                                if (ViewBag.Filters["type"] == l)
+                                {
+                                    <option value=@l selected>@l</option>
+
+                                }
+                                else
+                                {
+                                    <option value=@l>@l</option>
+
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            <option value="" selected>Wszystkie</option>
+                            @foreach (var l in ViewBag.RoomTypes)
+                            {
+                                <option value=@l>@l</option>
+                            }
+
+                        }
+                    </select>
+                    <button type="submit" class="filter-button">Zastosuj</button>
+
+                }
+                else
+                {
+                    <h3>Filtry</h3>
+                    <label>Cena (od - do):</label>
+                    <div class="price-filter">
+                        <input name="min" type="number" placeholder="Min" min="0" >
                         <input name="max" type="number" placeholder="Max" min="0">
                     </div>
 
                     <label>Lokalizacja:</label>
                     <select name="local">
-                        <option value="" selected>Wszystkie</option>
-                        <option value="gimnazjum">Gimnazjum</option>
-                    </select>
+                            <option value="" selected>Wszystkie</option>
+                            @foreach(var l in ViewBag.Locations)
+                            {
+                                <option value=@l>@l</option>  
+                            }
+                        </select>
 
-                    <label>Ilość miejsc:</label>
-                    <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
+                        <label>Ilość miejsc:</label>
+                        <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
 
-                    <label>Typ pokoju:</label>
-                    <select name="type">
-                        <option value="" selected>Wszystkie</option>
-                        <option value="sala naukowa">Sala naukowa</option>
-                        <option value="sala komercyjna">Sala komercyjna</option>
-                    </select>
-                    <button type="submit" class="filter-button">Zastosuj</button>
+                        <label>Typ pokoju:</label>
+                        <select name="type">
+                            <option value="" selected>Wszystkie</option>
+                            @foreach (var t in ViewBag.RoomTypes)
+                             {
+                                <option value=@t>@t</option>
+                             }
+                        </select>
+                        <button type="submit" class="filter-button">Zastosuj</button>
+                    
+                }
             
             </div>
     </form>
@@ -62,7 +155,13 @@
             <a class="page-link"
                asp-controller="Home"
                asp-action="FindRoom"
-               asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
+               asp-route-pageNumber="@(ViewBag.CurrentPage - 1)"
+               asp-route-find="@ViewBag.Filters["find"]"
+               asp-route-min="@ViewBag.Filters["cenaMin"]"
+               asp-route-max="@ViewBag.Filters["cenaMax"]"
+               asp-route-local="@ViewBag.Filters["local"]"
+               asp-route-capacity="@ViewBag.Filters["capacity"]"
+               asp-route-type="@ViewBag.Filters["type"]">
                 Poprzednia
             </a>
         }
@@ -76,7 +175,13 @@
             <a class="page-link"
                asp-controller="Home"
                asp-action="FindRoom"
-               asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
+               asp-route-pageNumber="@(ViewBag.CurrentPage + 1)"
+               asp-route-find="@ViewBag.Filters["find"]"
+               asp-route-min="@ViewBag.Filters["cenaMin"]"
+               asp-route-max="@ViewBag.Filters["cenaMax"]"
+               asp-route-local="@ViewBag.Filters["local"]"
+               asp-route-capacity="@ViewBag.Filters["capacity"]"
+               asp-route-type="@ViewBag.Filters["type"]">
                 Następna
             </a>
         }
