@@ -7,10 +7,8 @@ namespace RejestracjaSal.Models
         [Key]
         public int Reservation_id { get; set; }
         public int User_id {  get; set; }
-        public int Room_id {  get; set; }
-        public int Reservation_price { get; set; }
-        public DateTime Reservation_start_date { get; set; }
-        public DateTime Reservation_end_date { get; set; }
+        public int Total_price { get; set; }
+        public bool Paid {  get; set; }
         public string? Comments {  get; set; }
     }
 }

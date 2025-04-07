@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RejestracjaSal.Models;
 
@@ -11,9 +12,10 @@ using RejestracjaSal.Models;
 namespace RejestracjaSal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250407144908_rezerwacje")]
+    partial class rezerwacje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,17 +99,14 @@ namespace RejestracjaSal.Migrations
 
             modelBuilder.Entity("RejestracjaSal.Models.Reservations_Rooms", b =>
                 {
-                    b.Property<int>("ReservationRoom_Id")
+                    b.Property<int>("Reservation_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationRoom_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Reservation_id"), 1L, 1);
 
                     b.Property<DateTime>("Reservation_end_date")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Reservation_id")
-                        .HasColumnType("int");
 
                     b.Property<float>("Reservation_price")
                         .HasColumnType("real");
@@ -118,7 +117,7 @@ namespace RejestracjaSal.Migrations
                     b.Property<int>("Room_id")
                         .HasColumnType("int");
 
-                    b.HasKey("ReservationRoom_Id");
+                    b.HasKey("Reservation_id");
 
                     b.ToTable("ReservationsRooms");
                 });
@@ -497,7 +496,7 @@ namespace RejestracjaSal.Migrations
                             Name = "Admin",
                             Password = "Admin",
                             Phone = 698785383,
-                            Role_id = 3
+                            Role_id = 2
                         });
                 });
 #pragma warning restore 612, 618

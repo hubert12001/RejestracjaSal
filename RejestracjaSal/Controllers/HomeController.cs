@@ -124,14 +124,27 @@ namespace RejestracjaSal.Controllers
             return View(name);
         }
 
-        public IActionResult Pokoj(int id)
+        public IActionResult Reservation(int roomid, DateTime startDate, DateTime endDate)
         {
-            var room = (from Rooms in AppDbContext.Rooms
+            string cookie = Request.Cookies["login"];
+            Rooms room = AppDbContext.GetRoomById(roomid);
+
+            if (cookie != null && AppDbContext.IsRoomAvaible(room.Room_id, startDate, endDate)==true)
+            {
+                ViewBag.name = Request.Cookies["login"];
+
+
+                int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
+                AppDbContext.NewReservation(userId, room.Room_id, room.Room_price, startDate, endDate);
+            }
+
+            var room1 = (from Rooms in AppDbContext.Rooms
                         join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
                         join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
-                        where Rooms.Room_id == id
+                        where Rooms.Room_id == roomid
                         select new
                         {
+                            id = Rooms.Room_id,
                             name = Rooms.Name,
                             price = Rooms.Room_price,
                             capacity = Rooms.Capacity,
@@ -141,6 +154,29 @@ namespace RejestracjaSal.Controllers
                             location = Locations.Name,
                         }).FirstOrDefault();
 
+            ViewBag.Room = room1;
+            return View("Pokoj");
+        }
+
+
+        public IActionResult Pokoj(int id)
+        {
+            var room = (from Rooms in AppDbContext.Rooms
+                        join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
+                        join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
+                        where Rooms.Room_id == id
+                        select new
+                        {
+                            id = Rooms.Room_id,
+                            name = Rooms.Name,
+                            price = Rooms.Room_price,
+                            capacity = Rooms.Capacity,
+                            description = Rooms.Description,
+                            image = Rooms.Image,
+                            type = RoomTypes.Name,
+                            location = Locations.Name,
+                        }).FirstOrDefault();
+          
             if (room == null)
             {
                 return NotFound();

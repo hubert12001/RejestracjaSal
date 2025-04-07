@@ -27,8 +27,9 @@
             </div>
             <div class="booking-section">
                 <h3>Wybierz date rezerwacji:</h3>
-                <form>
-                    <input type="date">
+                <form asp-route-roomid="@ViewBag.Room.id" asp-controller="Home" asp-action="Reservation">
+                    <input type="datetime-local" name="startDate"/>
+                    <input type="datetime-local" name="endDate"/>
                     <button class="reserve-button">Zarezerwuj</button>
                 </form>
             </div>
