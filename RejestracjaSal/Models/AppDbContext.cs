@@ -11,6 +11,8 @@ namespace RejestracjaSal.Models
         public DbSet <Locations> Locations { get; set; }
         public DbSet <RoomTypes> RoomTypes { get; set; }
         public DbSet <Rooms> Rooms { get; set; }
+        public DbSet <Reservations> Reservations { get; set; }
+        public DbSet <Reservations_Rooms> ReservationsRooms { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -78,8 +80,75 @@ namespace RejestracjaSal.Models
 
             return query.ToList();
         }
+        public int GetUserIdByName(string name)
+        {
+            var query = Users
+                .Where(u => u.Name == name)
+                .FirstOrDefault();
+            return query.User_id;
+        }
+        public Rooms GetRoomById(int roomId)
+        {
+            var query = Rooms
+                .Where(r => r.Room_id == roomId)
+                .SingleOrDefault();
+            return query;
+        }
+
+        public bool IsRoomAvaible(int roomId, DateTime startDate, DateTime endDate)
+        {
+            var isOverlapping = ReservationsRooms
+                .Any(r =>
+                    r.Room_id == roomId &&
+                    startDate < r.Reservation_end_date &&
+                    endDate > r.Reservation_start_date
+                );
+
+            return !isOverlapping;
+        }
+        public void NewReservation(int userId, int roomId, float roomPrice, DateTime startDate, DateTime endDate)
+        {
+            var query = Reservations
+                .Where(r => r.User_id == userId && r.Paid == false)
+                .FirstOrDefault();
+
+            if (query == null)
+            {
+                var reservation = new Reservations
+                {
+                    User_id = userId,
+                    Total_price = 0,
+                    Paid = false
+                };
+
+                Reservations.Add(reservation);
+                SaveChanges();
+
+                query = reservation; 
+            }
 
 
+
+            TimeSpan time = endDate - startDate;
+            if (time.Hours > 0)
+            {
+
+                var resRoom = new Reservations_Rooms
+                {
+
+                    Reservation_id = query.Reservation_id,
+                    Room_id = roomId,
+                    Reservation_start_date = startDate,
+                    Reservation_end_date = endDate,
+                    Reservation_price = roomPrice*time.Hours,
+                };
+
+                ReservationsRooms.Add(resRoom);
+                SaveChanges();
+
+            }
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -420,6 +489,8 @@ namespace RejestracjaSal.Models
             modelBuilder.Entity<Locations>().HasData(locations);
             modelBuilder.Entity<RoomTypes>().HasData(roomTypes);
             modelBuilder.Entity<Rooms>().HasData(rooms);
+            modelBuilder.Entity<Reservations>();
+            modelBuilder.Entity<Reservations_Rooms>();
         }
     }
 }
