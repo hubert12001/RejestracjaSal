@@ -2,10 +2,10 @@
 
 namespace RejestracjaSal.Models
 {
-    public class Reservation
+    public class Reservations_Rooms
     {
         [Key]
         public int Reservation_id { get; set; }
-
+        public int Room_id { get; set; }
     }
 }
