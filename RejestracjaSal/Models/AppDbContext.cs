@@ -81,6 +81,12 @@ namespace RejestracjaSal.Models
 
             return query.ToList();
         }
+        public List<Users> GetUsers()
+        {
+            var query = from users in Users select users;
+
+            return query.ToList();
+        }
         public int GetUserIdByName(string name)
         {
             var query = Users
