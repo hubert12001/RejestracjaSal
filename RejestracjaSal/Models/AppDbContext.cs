@@ -11,6 +11,7 @@ namespace RejestracjaSal.Models
         public DbSet <Locations> Locations { get; set; }
         public DbSet <RoomTypes> RoomTypes { get; set; }
         public DbSet <Rooms> Rooms { get; set; }
+        public DbSet <Roles> Roles { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -79,6 +80,11 @@ namespace RejestracjaSal.Models
             return query.ToList();
         }
 
+        public List<Users> GetUsers()
+        {
+            var query = from user in Users select user;
+            return query.ToList();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,7 +98,7 @@ namespace RejestracjaSal.Models
                     Name = "Admin",
                     Email = "Admin@gmail.com",
                     Phone = 698785383,
-                    Role_id = 2,
+                    Role_id = 3,
                     Login = "Admin",
                     Password = "Admin"
 
@@ -415,6 +421,28 @@ namespace RejestracjaSal.Models
 
                 }
             };
+
+
+            List<Roles> roles = new List<Roles>()
+                {
+                    new Roles()
+                    {
+                        Roles_id = 1,
+                        Name = "Użytkownik zbanowany"
+                    },
+
+                    new Roles()
+                    {
+                        Roles_id = 2,
+                        Name = "Zwykły użytkownik"
+                    },
+
+                    new Roles()
+                    {
+                        Roles_id = 3,
+                        Name = "Administrator"
+                    }
+                };
 
             modelBuilder.Entity<Users>().HasData(users);
             modelBuilder.Entity<Locations>().HasData(locations);

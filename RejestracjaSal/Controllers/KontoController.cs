@@ -12,7 +12,7 @@ namespace RejestracjaSal.Controllers
         {
             Domain = "localhost", // Set the domain for the cookie
             Path = "/", // Cookie is available within the entire application
-            Expires = DateTime.Now.AddDays(7), // Set cookie expiration to 7 days from now
+            Expires = DateTime.Now.AddDays(1), // Set cookie expiration to 7 days from now
             Secure = false, // Ensure the cookie is only sent over HTTPS (set to false for local development)
             HttpOnly = false, // Prevent client-side scripts from accessing the cookie
             IsEssential = true // Indicates the cookie is essential for the application to function
@@ -41,7 +41,7 @@ namespace RejestracjaSal.Controllers
                 {
                     newUser = new Users
                     {
-                        Name = "Admin",
+                        Name = username,
                         Email = email,
                         Phone = Int32.Parse(phone),
                         Role_id = 1,
@@ -53,7 +53,7 @@ namespace RejestracjaSal.Controllers
                 {
                     newUser = new Users
                     {
-                        Name = "Admin",
+                        Name = username,
                         Email = email,
                         Role_id = 1,
                         Login = login,
@@ -96,8 +96,10 @@ namespace RejestracjaSal.Controllers
                 ViewBag.TotalPages = pgroom.Item2;
 
                 Response.Cookies.Append("login", users.Name, options);
-
+                Response.Cookies.Append("roleId", users.Role_id.ToString(), options);
+                
                 ViewBag.name = users.Name;
+                ViewBag.role = users.Role_id.ToString();
 
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();
@@ -116,6 +118,7 @@ namespace RejestracjaSal.Controllers
         public IActionResult Logout()
         {
             Response.Cookies.Delete("login", options);
+            Response.Cookies.Delete("roleId", options);
             return View("/Views/Home/Logowanie.cshtml");
         }
 

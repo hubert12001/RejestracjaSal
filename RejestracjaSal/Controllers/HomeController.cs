@@ -10,12 +10,12 @@ namespace RejestracjaSal.Controllers
     {
 
 
-        
+
         private CookieOptions options = new CookieOptions()
         {
             Domain = "localhost", // Set the domain for the cookie
             Path = "/", // Cookie is available within the entire application
-            Expires = DateTime.Now.AddDays(7), // Set cookie expiration to 7 days from now
+            Expires = DateTime.Now.AddDays(1), // Set cookie expiration to 7 days from now
             Secure = false, // Ensure the cookie is only sent over HTTPS (set to false for local development)
             HttpOnly = false, // Prevent client-side scripts from accessing the cookie
             IsEssential = true // Indicates the cookie is essential for the application to function
@@ -23,7 +23,7 @@ namespace RejestracjaSal.Controllers
 
 
         private readonly ILogger<HomeController> _logger;
-        
+
         AppDbContext AppDbContext;
         public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
         {
@@ -36,18 +36,18 @@ namespace RejestracjaSal.Controllers
         {
             List<string> types = AppDbContext.GetTypes();
             List<string> locations = AppDbContext.GetLocations();
-            (object, int) pgroom = AppDbContext.FindRooms(12,1);
+            List<Users> users = AppDbContext.GetUsers();
+            (object, int) pgroom = AppDbContext.FindRooms(12, 1);
 
             ViewBag.Rooms = pgroom.Item1;
             ViewBag.CurrentPage = 1;
             ViewBag.TotalPages = pgroom.Item2;
             ViewBag.RoomTypes = types;
             ViewBag.Locations = locations;
+            ViewBag.Users = users;
 
             return View();
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -64,8 +64,8 @@ namespace RejestracjaSal.Controllers
             }
             Console.WriteLine($"To jest lokal{local}");
             (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find, min, max, local, capacity, type);
-            
-            Dictionary<string,string> filerMap = new Dictionary<string,string>();
+
+            Dictionary<string, string> filerMap = new Dictionary<string, string>();
             filerMap.Add("find", find);
             filerMap.Add("cenaMin", min.ToString());
             filerMap.Add("cenaMax", max.ToString());
@@ -89,20 +89,35 @@ namespace RejestracjaSal.Controllers
         {
 
             string cookie = Request.Cookies["login"];
-            if (cookie != null) {
+            string roleCookie = Request.Cookies["roleId"];
+
+            if (cookie != null)
+            {
                 ViewBag.name = Request.Cookies["login"];
+            }
+
+            if (roleCookie != null)
+            {
+                ViewBag.role = Request.Cookies["roleId"];
             }
 
             if (name == "StronaGlowna")
             {
-                (object,int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber);
+                (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber);
                 ViewBag.Rooms = pgroom.Item1;
                 ViewBag.CurrentPage = pageNumber;
                 ViewBag.TotalPages = pgroom.Item2;
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();
+
                 ViewBag.RoomTypes = types;
                 ViewBag.Locations = locations;
+
+            }
+            if (name == "Administrator")
+            {
+                List<Users> users = AppDbContext.GetUsers();
+                ViewBag.Users = users;
             }
 
 
@@ -134,6 +149,27 @@ namespace RejestracjaSal.Controllers
 
             ViewBag.Room = room;
             return View("Pokoj");
+        }
+        public IActionResult BanUser(int id)
+        {
+            var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == id);
+            if (user != null)
+            {
+                user.Role_id = 1; // Ustawiamy rolê "Zbanowany" (Role_id = 1)
+                AppDbContext.SaveChanges();
+            }
+            return RedirectToAction("StaticSites", new { name = "Administrator" });
+        }
+
+        public IActionResult UnbanUser(int id)
+        {
+            var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == id);
+            if (user != null)
+            {
+                user.Role_id = 2; // Ustawiamy rolê "Zwyk³y u¿ytkownik" (Role_id = 2)
+                AppDbContext.SaveChanges();
+            }
+            return RedirectToAction("StaticSites", new { name = "Administrator" });
         }
 
     }
