@@ -45,7 +45,7 @@
                                 else
                                 {
                                     <option value=@l>@l</option>
-                                    
+
                                 }
                             }
 
@@ -57,7 +57,7 @@
                             {
                                 <option value=@l>@l</option>
                             }
-                            
+
                         }
                     </select>
 
@@ -108,63 +108,77 @@
 
                     <label>Lokalizacja:</label>
                     <select name="local">
-                            <option value="" selected>Wszystkie</option>
-                            @foreach(var l in ViewBag.Locations)
-                            {
-                                <option value=@l>@l</option>  
-                            }
-                        </select>
+                        <option value="" selected>Wszystkie</option>
+                        @foreach(var l in ViewBag.Locations)
+                        {
+                            <option value=@l>@l</option>  
+                        }
+                    </select>
 
-                        <label>Ilość miejsc:</label>
-                        <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
+                    <label>Ilość miejsc:</label>
+                    <input name="capacity" class="ilosc-miejsc" type="number" min="1" placeholder="Podaj ilość">
 
-                        <label>Typ pokoju:</label>
-                        <select name="type">
-                            <option value="" selected>Wszystkie</option>
-                            @foreach (var t in ViewBag.RoomTypes)
-                             {
-                                <option value=@t>@t</option>
-                             }
-                        </select>
-                        <button type="submit" class="filter-button">Zastosuj</button>
-                    
+                    <label>Typ pokoju:</label>
+                    <select name="type">
+                        <option value="" selected>Wszystkie</option>
+                        @foreach (var t in ViewBag.RoomTypes)
+                        {
+                            <option value=@t>@t</option>
+                        }
+                    </select>
+                    <button type="submit" class="filter-button">Zastosuj</button>
+
                 }
-            
+
             </div>
     </form>
-        <div class="rooms">
-            @if (ViewBag.Rooms != null)
+    <div class="rooms">
+        @if (ViewBag.Rooms != null)
+        {
+            foreach (var room in ViewBag.Rooms)
             {
-                foreach (var room in ViewBag.Rooms)
-                {
-                    <div class="room">
-                        <a asp-controller="Home" asp-action="Pokoj" asp-route-id="@room.id">
-                            <img class="room-image" src="~/Static/@room.image" />
-                            <h1>@room.name</h1>
-                            <p class="room-price">Cena: @room.price zł/h</p>
-                            <p class="room-location">@room.location</p>
-                        </a>
-                    </div>
-                }
+                <div class="room">
+                    <a asp-controller="Home" asp-action="Pokoj" asp-route-id="@room.id">
+                        <img class="room-image" src="~/Static/@room.image" />
+                        <h1>@room.name</h1>
+                        <p class="room-price">Cena: @room.price zł/h</p>
+                        <p class="room-location">@room.location</p>
+                    </a>
+                </div>
             }
-        </div>
+        }
     </div>
-    <div class="page">
-        @if (ViewBag.CurrentPage > 1)
+</div>
+<div class="page">
+    @if (ViewBag.CurrentPage > 1)
+    {
+        if(ViewBag.Filters!= null)
+        {
+            <a class="page-link"
+            asp-controller="Home"
+            asp-action="FindRoom"
+            asp-route-pageNumber="@(ViewBag.CurrentPage - 1)"
+            asp-route-find="@ViewBag.Filters["find"]"
+            asp-route-min="@ViewBag.Filters["cenaMin"]"
+            asp-route-max="@ViewBag.Filters["cenaMax"]"
+            asp-route-local="@ViewBag.Filters["local"]"
+            asp-route-capacity="@ViewBag.Filters["capacity"]"
+            asp-route-type="@ViewBag.Filters["type"]">
+                Poprzednia
+            </a>
+
+        }
+        else
         {
             <a class="page-link"
                asp-controller="Home"
                asp-action="FindRoom"
-               asp-route-pageNumber="@(ViewBag.CurrentPage - 1)"
-               asp-route-find="@ViewBag.Filters["find"]"
-               asp-route-min="@ViewBag.Filters["cenaMin"]"
-               asp-route-max="@ViewBag.Filters["cenaMax"]"
-               asp-route-local="@ViewBag.Filters["local"]"
-               asp-route-capacity="@ViewBag.Filters["capacity"]"
-               asp-route-type="@ViewBag.Filters["type"]">
+               asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
                 Poprzednia
             </a>
+            
         }
+    }
 
         <span class="current-page">
             Strona @ViewBag.CurrentPage z @ViewBag.TotalPages
@@ -172,18 +186,32 @@
 
         @if (ViewBag.CurrentPage < ViewBag.TotalPages)
         {
-            <a class="page-link"
-               asp-controller="Home"
-               asp-action="FindRoom"
-               asp-route-pageNumber="@(ViewBag.CurrentPage + 1)"
-               asp-route-find="@ViewBag.Filters["find"]"
-               asp-route-min="@ViewBag.Filters["cenaMin"]"
-               asp-route-max="@ViewBag.Filters["cenaMax"]"
-               asp-route-local="@ViewBag.Filters["local"]"
-               asp-route-capacity="@ViewBag.Filters["capacity"]"
-               asp-route-type="@ViewBag.Filters["type"]">
-                Następna
-            </a>
+            if (ViewBag.Filters != null)
+            {
+                <a class="page-link"
+                   asp-controller="Home"
+                   asp-action="FindRoom"
+                   asp-route-pageNumber="@(ViewBag.CurrentPage + 1)"
+                   asp-route-find="@ViewBag.Filters["find"]"
+                   asp-route-min="@ViewBag.Filters["cenaMin"]"
+                   asp-route-max="@ViewBag.Filters["cenaMax"]"
+                   asp-route-local="@ViewBag.Filters["local"]"
+                   asp-route-capacity="@ViewBag.Filters["capacity"]"
+                   asp-route-type="@ViewBag.Filters["type"]">
+                    Poprzednia
+                </a>
+
+            }
+            else
+            {
+                <a class="page-link"
+                   asp-controller="Home"
+                   asp-action="FindRoom"
+                   asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
+                    Poprzednia
+                </a>
+
+            }
         }
     </div>
 </div>
