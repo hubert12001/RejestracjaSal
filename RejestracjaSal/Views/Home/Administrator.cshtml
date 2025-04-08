@@ -4,42 +4,63 @@
 
 @if(ViewBag.role=="3")
 {
-    <h2>Panel administratora</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Imię</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Rola</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in ViewBag.Users)
-            {
-                <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Email</td>
-                    <td>@user.Phone</td>
-                    <td>@(user.Role_id == 1 ? "Zbanowany" : "Zwykły użytkownik")</td>
-                    <td>
-                        @if (user.Role_id == 1)
-                        {
-                            <button class="btn btn-success" onclick="location.href='@Url.Action("UnbanUser", "Home", new { id = user.User_id })'">Odbanuj</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-danger" onclick="location.href='@Url.Action("BanUser", "Home", new { id = user.User_id })'">Zbanuj</button>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="admin-panel">
+        <h2>Panel Administratora</h2>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                        <th>Rola</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in ViewBag.Users)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>@user.Phone</td>
+                            <td>
+                                @(user.Role_id == 1
+                                    ? "Zbanowany"
+                                    : user.Role_id == 3
+                                    ? "Administrator"
+                                    : "Zwykły użytkownik")
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    @if (user.Role_id == 3)
+                                    {
+                                        <span class="btn-disabled">Admin</span>
+                                    }
+                                    else if (user.Role_id == 1)
+                                    {
+                                        <a class="btn-action btn-unban" href="@Url.Action("UnbanUser", "Home", new { id = user.User_id })">Odbanuj</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn-action btn-ban" href="@Url.Action("BanUser", "Home", new { id = user.User_id })">Zbanuj</a>
+                                    }
+
+                                    <a class="btn-action btn-edit" asp-controller="Home" asp-action="StaticSites" asp-route-name="Edycja">Edytuj</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
 
 else if(ViewBag.role!="3")
 {
-    <h1>Brak dostępu</h1>
+    <div class="no-access">
+        <h1>Brak dostępu</h1>
+        <p>Nie masz uprawnień do wyświetlania tego panelu.</p>
+    </div>
 }

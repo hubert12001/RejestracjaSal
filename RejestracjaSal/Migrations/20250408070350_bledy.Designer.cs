@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RejestracjaSal.Models;
 
@@ -11,9 +12,10 @@ using RejestracjaSal.Models;
 namespace RejestracjaSal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250408070350_bledy")]
+    partial class bledy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,7 +342,7 @@ namespace RejestracjaSal.Migrations
                             Room_id = 17,
                             Capacity = 24,
                             Description = "Przystosowana do zajęć informatycznych sala z nowoczesnym sprzętem. Każde stanowisko wyposażone jest w komputer z szybkim dostępem do internetu. Dodatkowo sala oferuje tablicę interaktywną oraz ergonomiczne krzesła zapewniające komfort nawet podczas dłuższych zajęć.\r\n\r\n",
-                            Image = "sala-lekcyjna17.jpg",
+                            Image = "sala-lekcyjna17.png",
                             Location_id = 1,
                             Name = "Nowoczesna sala komputerowa",
                             Room_price = 75f,

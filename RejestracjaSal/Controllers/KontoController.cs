@@ -97,9 +97,14 @@ namespace RejestracjaSal.Controllers
 
                 Response.Cookies.Append("login", users.Name, options);
                 Response.Cookies.Append("roleId", users.Role_id.ToString(), options);
-                
                 ViewBag.name = users.Name;
                 ViewBag.role = users.Role_id.ToString();
+
+                if (ViewBag.role == "1")
+                {
+                    ViewBag.message = "Twoje konto jest zbanowane";
+                    return View("/Views/Home/Logowanie.cshtml");
+                }
 
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();

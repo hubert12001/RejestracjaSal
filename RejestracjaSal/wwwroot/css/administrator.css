@@ -1,3 +1,124 @@
-﻿.table {
-    border: dotted
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.admin-panel {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.admin-panel h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--200);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+    background-color: var(--100);
+    color: white;
+}
+
+.admin-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-ban, .btn-unban {
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-ban {
+    background-color: #e74c3c;
+}
+
+.btn-ban:hover {
+    background-color: #c0392b;
+}
+
+.btn-unban {
+    background-color: #2ecc71;
+}
+
+.btn-unban:hover {
+    background-color: #27ae60;
+}
+
+.no-access {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    color: #e74c3c;
+}
+
+.no-access h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.btn-edit {
+    background-color: #3498db;
+    padding: 6px 12px;
+    margin-left: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #2980b9;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    min-width: 180px; /* lub więcej/mniej w zależności od wyglądu */
+}
+
+.btn-action {
+    min-width: 80px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-disabled {
+    background-color: #bdc3c7;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    opacity: 0.7;
+    min-width: 80px;
+    text-align: center;
+    white-space: nowrap;
 }

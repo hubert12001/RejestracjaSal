@@ -1,0 +1,12 @@
+﻿@if (ViewBag.role == "3")
+{
+    <h2>Panel edycji</h2>
+}
+
+else if (ViewBag.role != "3")
+{
+    <div class="no-access">
+        <h1>Brak dostępu</h1>
+        <p>Nie masz uprawnień do wyświetlania tego panelu.</p>
+    </div>
+}

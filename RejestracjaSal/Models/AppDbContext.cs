@@ -7,19 +7,18 @@ namespace RejestracjaSal.Models
 {
     public class AppDbContext : DbContext
     {
-        public DbSet <Users> Users { get; set; }
-        public DbSet <Locations> Locations { get; set; }
-        public DbSet <RoomTypes> RoomTypes { get; set; }
-        public DbSet <Rooms> Rooms { get; set; }
-        public DbSet <Reservations> Reservations { get; set; }
-        public DbSet <Reservations_Rooms> ReservationsRooms { get; set; }
-        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Locations> Locations { get; set; }
+        public DbSet<RoomTypes> RoomTypes { get; set; }
+        public DbSet<Rooms> Rooms { get; set; }
+        public DbSet<Reservations> Reservations { get; set; }
+        public DbSet<Reservations_Rooms> ReservationsRooms { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
-        
+
         public (object, int) FindRooms(int pageSize, int pageNumber, string find = "",
-                                       int min = 0, int max = 0, string local = "", 
+                                       int min = 0, int max = 0, string local = "",
                                        int capacity = 0, string type = "")
         {
             var query = from rooms in Rooms
@@ -47,15 +46,15 @@ namespace RejestracjaSal.Models
             }
             if (!String.IsNullOrEmpty(local))
             {
-                query = query.Where(r => r.location.Trim().ToLower().Contains(local.Trim().ToLower()));  
+                query = query.Where(r => r.location.Trim().ToLower().Contains(local.Trim().ToLower()));
             }
             if (capacity >= 0)
             {
                 query = query.Where(r => r.capacity >= capacity);
             }
-            if (!String.IsNullOrEmpty(type)) 
-            { 
-                query =query.Where(r => r.type.Trim().ToLower().Contains(type.Trim().ToLower()));
+            if (!String.IsNullOrEmpty(type))
+            {
+                query = query.Where(r => r.type.Trim().ToLower().Contains(type.Trim().ToLower()));
             }
 
             int totalRooms = query.Count();
@@ -73,17 +72,17 @@ namespace RejestracjaSal.Models
             var query = from roomTypes in RoomTypes select roomTypes.Name;
 
             return query.ToList();
-        }        
-        public List<string> GetLocations()
-        {
-            var query = from locations in Locations select locations.Name;
-            List<string> l = new List<string>();
-
-            return query.ToList();
         }
         public List<Users> GetUsers()
         {
             var query = from users in Users select users;
+
+            return query.ToList();
+        }
+        public List<string> GetLocations()
+        {
+            var query = from locations in Locations select locations.Name;
+            List<string> l = new List<string>();
 
             return query.ToList();
         }
@@ -111,6 +110,13 @@ namespace RejestracjaSal.Models
                     endDate > r.Reservation_start_date
                 );
 
+            return !isOverlapping;
+        }
+        public void NewReservation(int userId, int roomId, float roomPrice, DateTime startDate, DateTime endDate)
+        {
+            var query = Reservations
+                .Where(r => r.User_id == userId && r.Paid == false)
+                .FirstOrDefault();
 
             if (query == null)
             {
@@ -124,7 +130,7 @@ namespace RejestracjaSal.Models
                 Reservations.Add(reservation);
                 SaveChanges();
 
-                query = reservation; 
+                query = reservation;
             }
 
 
@@ -140,7 +146,7 @@ namespace RejestracjaSal.Models
                     Room_id = roomId,
                     Reservation_start_date = startDate,
                     Reservation_end_date = endDate,
-                    Reservation_price = roomPrice*time.Hours,
+                    Reservation_price = roomPrice * time.Hours,
                 };
 
                 ReservationsRooms.Add(resRoom);
@@ -161,7 +167,7 @@ namespace RejestracjaSal.Models
                     Name = "Admin",
                     Email = "Admin@gmail.com",
                     Phone = 698785383,
-                    Role_id = 3,
+                    Role_id = 2,
                     Login = "Admin",
                     Password = "Admin"
 
@@ -396,7 +402,7 @@ namespace RejestracjaSal.Models
                     Type_id = 1,
                     Room_price = 75,
                     Description = "Przystosowana do zajęć informatycznych sala z nowoczesnym sprzętem. Każde stanowisko wyposażone jest w komputer z szybkim dostępem do internetu. Dodatkowo sala oferuje tablicę interaktywną oraz ergonomiczne krzesła zapewniające komfort nawet podczas dłuższych zajęć.\r\n\r\n",
-                    Image = "sala-lekcyjna17.png"
+                    Image = "sala-lekcyjna17.jpg"
 
                 },
                 new Rooms()
@@ -420,7 +426,7 @@ namespace RejestracjaSal.Models
                     Type_id = 1,
                     Room_price = 75,
                     Description = "Elegancka, przestronna sala idealna na zebrania, prelekcje i spotkania biznesowe. Duże okna wychodzą na wewnętrzny dziedziniec, zapewniając piękny widok i dużo światła dziennego. Pomieszczenie wyposażone jest w ekran, projektor oraz system nagłośnienia.",
-                    Image = "sala-lekcyjna19.png"
+                    Image = "sala-lekcyjna19.jpg"
 
                 },
                 new Rooms()
@@ -484,28 +490,6 @@ namespace RejestracjaSal.Models
 
                 }
             };
-
-
-            List<Roles> roles = new List<Roles>()
-                {
-                    new Roles()
-                    {
-                        Roles_id = 1,
-                        Name = "Użytkownik zbanowany"
-                    },
-
-                    new Roles()
-                    {
-                        Roles_id = 2,
-                        Name = "Zwykły użytkownik"
-                    },
-
-                    new Roles()
-                    {
-                        Roles_id = 3,
-                        Name = "Administrator"
-                    }
-                };
 
             modelBuilder.Entity<Users>().HasData(users);
             modelBuilder.Entity<Locations>().HasData(locations);
