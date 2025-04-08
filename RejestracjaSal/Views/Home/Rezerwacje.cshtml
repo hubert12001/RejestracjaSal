@@ -1,30 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Moje Rezerwacje";
 }
-<div class="rooms">
+<div class="resv-container">
     @if (ViewBag.Reservation != null)
     {
-        foreach (var reservation in ViewBag.Reservation)
-        {
-            <div class="room">
-                <a asp-controller="Home" asp-action="Pokoj" asp-route-id="@reservation.roomId">
-                    <img class="room-image" src="~/Static/@reservation.image" />
-                    <h1>@reservation.name</h1>
-                    <p class="room-price">Cena:@reservation.price</p>
-                    <p class="room-location">Start:@reservation.startDate</p>
-                    <p class="room-location">Koniec:@reservation.endDate</p>
-                </a>
-                <a asp-controller="Home" asp-action="DeleteReservation" asp-route-reservationId="@reservation.id">Usuń</a>
-            </div>
-        }
-        <h1>Cena całej rezerwacji @ViewBag.TotalPrice</h1>
-        <a type="submit" asp-controller="Home" asp-action="Pay" asp-route-reservationId="@ViewBag.ReservationId">Zapłać</a>
+        <div class="resv-list">
+            @foreach (var reservation in ViewBag.Reservation)
+            {
+                <div class="resv-card">
+                    <a class="resv-link" asp-controller="Home" asp-action="Pokoj" asp-route-id="@reservation.roomId">
+                        <img class="resv-image" src="~/Static/@reservation.image" alt="Zdjęcie pokoju" />
+                        <div class="resv-details">
+                            <h2 class="resv-name">@reservation.name</h2>
+                            <p class="resv-price">Cena: @reservation.price</p>
+                            <p class="resv-date">Start: @reservation.startDate</p>
+                            <p class="resv-date">Koniec: @reservation.endDate</p>
+                        </div>
+                    </a>
+                    <a class="resv-delete" asp-controller="Home" asp-action="DeleteReservation" asp-route-reservationId="@reservation.id">Usuń</a>
+                </div>
+            }
+        </div>
+        <div class="resv-summary">
+            <h2 class="resv-total">Cena całej rezerwacji: @ViewBag.TotalPrice</h2>
+            <a class="resv-pay-button" asp-controller="Home" asp-action="Pay" asp-route-reservationId="@ViewBag.ReservationId">Zapłać</a>
+        </div>
     }
-    @if(ViewBag.Message!=null)
+
+    @if (ViewBag.Message != null)
     {
-        <h1>@ViewBag.Message</h1>
+        <h2 class="resv-message">@ViewBag.Message</h2>
     }
 </div>
+
+
 
 
 
