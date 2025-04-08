@@ -112,32 +112,112 @@ namespace RejestracjaSal.Models
 
             return !isOverlapping;
         }
+
+        public void DeleteReservationById(int reservationId)
+        {
+            var reservation = ReservationsRooms.FirstOrDefault(r => r.ReservationRoom_Id == reservationId);
+
+            if (reservation != null)
+            {
+                ReservationsRooms.Remove(reservation);
+                SaveChanges();
+                Console.WriteLine($"Reservation {reservationId} has been deleted.");
+            }
+            else
+            {
+                Console.WriteLine($"Reservation with ID {reservationId} not found.");
+            }
+        }
+
+        public int GetReservationIdByUserId(int userId)
+        {
+            var query = Reservations.Where(r => r.User_id == userId && r.Paid == false).FirstOrDefault();
+            if(query != null)
+            {
+                return query.Reservation_id;
+
+            }
+            return 0;
+        }
+        public void ReservationSetTotal(int reservationId, float total)
+        {
+            var reservation = Reservations.FirstOrDefault(r => r.Reservation_id == reservationId);
+
+            if (reservation != null)
+            {
+                reservation.Total_price = total;
+                SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine($"Reservation with ID {reservationId} not found.");
+            }
+        }
+        public void ReservationSetPaid(int reservationId)
+        {
+            var reservation = Reservations.FirstOrDefault(r => r.Reservation_id == reservationId);
+
+            if (reservation != null)
+            {
+                reservation.Paid = true;
+                SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine($"Reservation with ID {reservationId} not found.");
+            }
+        }
+        public (object, int, float) GetReservationsById(int ReservationId, int pageSize, int pageNumber)
+        {
+            var query = from reservationRooms in ReservationsRooms
+                        join rooms in Rooms on reservationRooms.Room_id equals rooms.Room_id
+                        where reservationRooms.Reservation_id == ReservationId
+                        select new
+                        {
+                            id = reservationRooms.ReservationRoom_Id,
+                            roomId = reservationRooms.Room_id,
+                            name = rooms.Name,
+                            image = rooms.Image,
+                            startDate = reservationRooms.Reservation_start_date,
+                            endDate = reservationRooms.Reservation_end_date,
+                            price = reservationRooms.Reservation_price
+                        };
+            
+            int totalReservations = query.Count();
+            int totalPages = (int)Math.Ceiling(totalReservations / (double)pageSize);
+
+            var reservationList = query.ToList();
+            float totalPrice = reservationList.Sum(x => x.price);
+
+            ReservationSetTotal(ReservationId, totalPrice);
+            return (reservationList.Skip((pageNumber - 1) * pageSize).Take(pageSize),totalPages, totalPrice);
+        }
         public void NewReservation(int userId, int roomId, float roomPrice, DateTime startDate, DateTime endDate)
         {
-            var query = Reservations
+            TimeSpan time = endDate - startDate;
+            Console.WriteLine($"DLACZEGO {time.TotalHours}");
+            if (time.TotalHours > 0)
+            {
+                var query = Reservations
                 .Where(r => r.User_id == userId && r.Paid == false)
                 .FirstOrDefault();
 
-            if (query == null)
-            {
-                var reservation = new Reservations
+                if (query == null)
                 {
-                    User_id = userId,
-                    Total_price = 0,
-                    Paid = false
-                };
+                    var reservation = new Reservations
+                    {
+                        User_id = userId,
+                        Total_price = 0,
+                        Paid = false
+                    };
 
-                Reservations.Add(reservation);
-                SaveChanges();
+                    Reservations.Add(reservation);
+                    SaveChanges();
 
-                query = reservation;
-            }
+                    query = reservation;
+                }
 
 
-
-            TimeSpan time = endDate - startDate;
-            if (time.Hours > 0)
-            {
 
                 var resRoom = new Reservations_Rooms
                 {
@@ -146,7 +226,7 @@ namespace RejestracjaSal.Models
                     Room_id = roomId,
                     Reservation_start_date = startDate,
                     Reservation_end_date = endDate,
-                    Reservation_price = roomPrice * time.Hours,
+                    Reservation_price = roomPrice*(float)Math.Ceiling(time.TotalHours),
                 };
 
                 ReservationsRooms.Add(resRoom);

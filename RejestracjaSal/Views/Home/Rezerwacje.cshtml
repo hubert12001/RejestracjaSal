@@ -1,3 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Moje Rezerwacje";
 }
+<div class="rooms">
+    @if (ViewBag.Reservation != null)
+    {
+        foreach (var reservation in ViewBag.Reservation)
+        {
+            <div class="room">
+                <a asp-controller="Home" asp-action="Pokoj" asp-route-id="@reservation.roomId">
+                    <img class="room-image" src="~/Static/@reservation.image" />
+                    <h1>@reservation.name</h1>
+                    <p class="room-price">Cena:@reservation.price</p>
+                    <p class="room-location">Start:@reservation.startDate</p>
+                    <p class="room-location">Koniec:@reservation.endDate</p>
+                </a>
+                <a asp-controller="Home" asp-action="DeleteReservation" asp-route-reservationId="@reservation.id">Usuń</a>
+            </div>
+        }
+        <h1>Cena całej rezerwacji @ViewBag.TotalPrice</h1>
+        <a type="submit" asp-controller="Home" asp-action="Pay" asp-route-reservationId="@ViewBag.ReservationId">Zapłać</a>
+    }
+    @if(ViewBag.Message!=null)
+    {
+        <h1>@ViewBag.Message</h1>
+    }
+</div>
+
+
+
+<div class="page">
+    @if (ViewBag.CurrentPage > 1)
+    {
+       <a class="page-link"
+          asp-controller="Home"
+           asp-action="StaticSites"
+           asp-route-name="Rezerwacje"
+          asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
+           Poprzednia
+       </a>
+
+    }
+
+    <span class="current-page">
+        Strona @ViewBag.CurrentPage z @ViewBag.TotalPages
+    </span>
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+
+        <a class="page-link"
+           asp-controller="Home"
+           asp-action="StaticSites"
+           asp-route-name="Rezerwacje"
+           asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
+            Nastepna
+        </a>      
+    }
+</div>
