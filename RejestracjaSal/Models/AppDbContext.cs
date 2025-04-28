@@ -166,11 +166,15 @@ namespace RejestracjaSal.Models
         {
             var query = Reservations.Where(r => r.User_id == userId && r.Paid == false).FirstOrDefault();
 
-            var query2 = ReservationsRooms.Where(r => r.Reservation_id == query.Reservation_id).FirstOrDefault();
 
-            if (query != null && query2 != null)
+            if (query != null)
             {
-                return query.Reservation_id;
+                var query2 = ReservationsRooms.Where(r => r.Reservation_id == query.Reservation_id).FirstOrDefault();
+                if(query2 != null)
+                {
+                    return query.Reservation_id;
+
+                }
 
             }
             return 0;

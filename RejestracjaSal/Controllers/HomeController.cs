@@ -113,6 +113,7 @@ namespace RejestracjaSal.Controllers
             {
                 if (User.Identity.IsAuthenticated == true) {
                     int userId = AppDbContext.GetUserIdByName(User.FindFirst(ClaimTypes.Name)?.Value);
+                    Console.WriteLine("TUATJATJAOTJWEAO JEWAOJTAWOGWEOW OEFBSI@!3128yr9efw7y9f" + userId.ToString());
                     int reservationId = AppDbContext.GetReservationIdByUserId(userId);
                     if (reservationId != 0)
                     {
