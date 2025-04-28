@@ -16,7 +16,7 @@
                     <h3>Użytkownicy</h3>
                     <p>Zarządzaj użytkownikami: edytuj, banuj.</p>
                 </div>
-                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Uzytkownicy" class="btn-action">Zarządzaj użytkownikami</a>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Uzytkownicy" class="btn-action-admin">Zarządzaj użytkownikami</a>
             </div>
 
             <div class="card">
@@ -27,7 +27,7 @@
                     <h3>Pokoje</h3>
                     <p>Zarządzaj pokojami: dodawaj, edytuj, usuwaj pokoje.</p>
                 </div>
-                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Pokoje" class="btn-action">Zarządzaj pokojami</a>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Pokoje" class="btn-action-admin">Zarządzaj pokojami</a>
             </div>
 
             <div class="card">
@@ -38,7 +38,7 @@
                     <h3>Rezerwacje</h3>
                     <p>Zarządzaj rezerwacjami: anuluj, edytuj rezerwacje.</p>
                 </div>
-                <a class="btn-action" href="@Url.Action("ManageReservations", "Home")">Zarządzaj rezerwacjami</a>
+                <a class="btn-action-admin" href="@Url.Action("ManageReservations", "Home")">Zarządzaj rezerwacjami</a>
             </div>
         </div>
     </div>
