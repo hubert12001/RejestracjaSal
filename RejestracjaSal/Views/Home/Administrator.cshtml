@@ -5,59 +5,46 @@
 @if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
 {
     <div class="admin-panel">
-        <h2>Panel Administratora</h2>
-        <div class="table-container">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Email</th>
-                        <th>Telefon</th>
-                        <th>Rola</th>
-                        <th>Akcje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in ViewBag.Users)
-                    {
-                        <tr>
-                            <td>@user.Name</td>
-                            <td>@user.Email</td>
-                            <td>@user.Phone</td>
-                            <td>
-                                @(user.Role_id == 1
-                                    ? "Zbanowany"
-                                    : user.Role_id == 3
-                                    ? "Administrator"
-                                    : "Zwykły użytkownik")
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    @if (user.Role_id == 3)
-                                    {
-                                        <span class="btn-disabled">Admin</span>
-                                    }
-                                    else if (user.Role_id == 1)
-                                    {
-                                        <a class="btn-action btn-unban" href="@Url.Action("UnbanUser", "Home", new { id = user.User_id })">Odbanuj</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn-action btn-ban" href="@Url.Action("BanUser", "Home", new { id = user.User_id })">Zbanuj</a>
-                                    }
+        <h2>Wybierz opcję zarządzania</h2>
 
-                                    <a class="btn-action btn-edit" asp-controller="Home" asp-action="Edycja" asp-route-id="@user.User_id">Edytuj</a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Użytkownicy</h3>
+                    <p>Zarządzaj użytkownikami: edytuj, banuj.</p>
+                </div>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Uzytkownicy" class="btn-action">Zarządzaj użytkownikami</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa fa-bed"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Pokoje</h3>
+                    <p>Zarządzaj pokojami: dodawaj, edytuj, usuwaj pokoje.</p>
+                </div>
+                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Admin_Pokoje" class="btn-action">Zarządzaj pokojami</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa fa-calendar-check"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Rezerwacje</h3>
+                    <p>Zarządzaj rezerwacjami: anuluj, edytuj rezerwacje.</p>
+                </div>
+                <a class="btn-action" href="@Url.Action("ManageReservations", "Home")">Zarządzaj rezerwacjami</a>
+            </div>
         </div>
     </div>
 }
 
-else if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "3")
+else
 {
     <div class="no-access">
         <h1>Brak dostępu</h1>

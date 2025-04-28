@@ -79,6 +79,13 @@ namespace RejestracjaSal.Models
 
             return query.ToList();
         }
+        public List<Rooms> GetRooms()
+        {
+            var query = from rooms in Rooms select rooms;
+
+            return query.ToList();
+        }
+
         public List<string> GetLocations()
         {
             var query = from locations in Locations select locations.Name;

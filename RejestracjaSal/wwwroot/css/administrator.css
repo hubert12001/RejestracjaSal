@@ -46,7 +46,7 @@
     background-color: #f1f1f1;
 }
 
-.btn-ban, .btn-unban {
+.btn-ban, .btn-unban, .btn-delete {
     padding: 6px 12px;
     border-radius: 8px;
     text-decoration: none;
@@ -55,7 +55,7 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-ban {
+.btn-ban, .btn-delete {
     background-color: #e74c3c;
 }
 
@@ -121,4 +121,104 @@
     min-width: 80px;
     text-align: center;
     white-space: nowrap;
+}
+
+
+/* Podstawowe style */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Styl panelu administratora */
+.admin-panel {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.admin-panel h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #34495e;
+}
+
+/* Kontener dla kart */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Styl kart */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 40px;
+    color: #3498db;
+    margin-bottom: 20px;
+}
+
+.card-content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.card-content p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+/* Styl przycisków */
+.btn-action {
+    background-color: #3498db;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-action:hover {
+    background-color: #2980b9;
+}
+
+/* Brak dostępu */
+.no-access {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    color: #e74c3c;
+}
+
+.no-access h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
 }

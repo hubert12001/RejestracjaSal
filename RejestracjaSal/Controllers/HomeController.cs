@@ -134,10 +134,16 @@ namespace RejestracjaSal.Controllers
                 }
 
             }
-            if (name == "Administrator")
+            if (name == "Admin_Uzytkownicy")
             {
                 List<Users> users = AppDbContext.GetUsers();
                 ViewBag.Users = users;
+            }
+
+            if (name == "Admin_Pokoje")
+            {
+                List<Rooms> room = AppDbContext.GetRooms();
+                ViewBag.Rooms = room;
             }
 
 
@@ -209,10 +215,8 @@ namespace RejestracjaSal.Controllers
             return View("Pokoj");
         }
 
-        public IActionResult Edycja(int id)
+        public IActionResult EdycjaUzytkownicy(int id)
         {
-
-
             var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == id);
 
             if (user == null)
@@ -221,11 +225,23 @@ namespace RejestracjaSal.Controllers
             }
 
             ViewBag.User = user;
-            return View("Edycja");
+            return View("Edycja_Uzytkownicy");
+        }
+        public IActionResult EdycjaPokoji(int id)
+        {
+            var room = AppDbContext.Rooms.FirstOrDefault(r => r.Room_id == id);
+
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Room = room;
+            return View("Edycja_Pokoji");
         }
 
         [HttpPost]
-        public IActionResult EdycjaPost(int User_id, string Name, string Email, string Phone )
+        public IActionResult EdycjaUzytkownicyPost(int User_id, string Name, string Email, string Phone, int Role_id, string Login, string Password)
         {
             var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == User_id);
             if (user != null)
@@ -233,10 +249,13 @@ namespace RejestracjaSal.Controllers
                 user.Name = Name;
                 user.Email = Email;
                 user.Phone = Phone;
+                user.Role_id = Role_id;
+                user.Login = Login;
+                user.Password = Password;
                 AppDbContext.SaveChanges();
             }
 
-            return RedirectToAction("StaticSites", new { name = "Administrator" });
+            return RedirectToAction("StaticSites", new { name = "Admin_Uzytkownicy" });
         }
 
         public IActionResult BanUser(int id)
@@ -248,7 +267,7 @@ namespace RejestracjaSal.Controllers
                 user.Role_id = 1; // Ustawiamy rolê "Zbanowany" (Role_id = 1)
                 AppDbContext.SaveChanges();
             }
-            return RedirectToAction("StaticSites", new { name = "Administrator" });
+            return RedirectToAction("StaticSites", new { name = "Admin_Uzytkownicy" });
         }
 
         public IActionResult UnbanUser(int id)
@@ -259,7 +278,7 @@ namespace RejestracjaSal.Controllers
                 user.Role_id = 2; // Ustawiamy rolê "Zwyk³y u¿ytkownik" (Role_id = 2)
                 AppDbContext.SaveChanges();
             }
-            return RedirectToAction("StaticSites", new { name = "Administrator" });
+            return RedirectToAction("StaticSites", new { name = "Admin_Uzytkownicy" });
         }
 
     }
