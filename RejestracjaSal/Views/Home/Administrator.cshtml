@@ -46,7 +46,7 @@
                                         <a class="btn-action btn-ban" href="@Url.Action("BanUser", "Home", new { id = user.User_id })">Zbanuj</a>
                                     }
 
-                                    <a class="btn-action btn-edit" asp-controller="Home" asp-action="StaticSites" asp-route-name="Edycja">Edytuj</a>
+                                    <a class="btn-action btn-edit" asp-controller="Home" asp-action="Edycja" asp-route-id="@user.User_id">Edytuj</a>
                                 </div>
                             </td>
                         </tr>

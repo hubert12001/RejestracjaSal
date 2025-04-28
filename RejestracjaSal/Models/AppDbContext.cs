@@ -249,7 +249,7 @@ namespace RejestracjaSal.Models
                     User_id = 1,
                     Name = "Admin",
                     Email = "Admin@gmail.com",
-                    Phone = 698785383,
+                    Phone = "698785383",
                     Role_id = 2,
                     Login = "Admin",
                     Password = "Admin"
