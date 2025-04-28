@@ -151,7 +151,7 @@ body {
 /* Kontener dla kart */
 .card-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 20px;
@@ -195,7 +195,7 @@ body {
 }
 
 /* Styl przycisków */
-.btn-action {
+.btn-action-admin {
     background-color: #3498db;
     padding: 10px 20px;
     color: white;
@@ -206,19 +206,6 @@ body {
     margin-top: 20px;
 }
 
-.btn-action:hover {
+.btn-action-admin:hover {
     background-color: #2980b9;
-}
-
-/* Brak dostępu */
-.no-access {
-    max-width: 600px;
-    margin: 100px auto;
-    text-align: center;
-    color: #e74c3c;
-}
-
-.no-access h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
 }
