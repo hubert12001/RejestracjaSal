@@ -25,44 +25,39 @@
             <h2 class="resv-total">Cena całej rezerwacji: @ViewBag.TotalPrice</h2>
             <a class="resv-pay-button" asp-controller="Home" asp-action="Pay" asp-route-reservationId="@ViewBag.ReservationId">Zapłać</a>
         </div>
+        <div class="page">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a class="page-link"
+                   asp-controller="Home"
+                   asp-action="StaticSites"
+                   asp-route-name="Rezerwacje"
+                   asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
+                    Poprzednia
+                </a>
+
+            }
+
+            <span class="current-page">
+                Strona @ViewBag.CurrentPage z @ViewBag.TotalPages
+            </span>
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+
+                <a class="page-link"
+                   asp-controller="Home"
+                   asp-action="StaticSites"
+                   asp-route-name="Rezerwacje"
+                   asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
+                    Nastepna
+                </a>
+            }
+        </div>
     }
 
     @if (ViewBag.Message != null)
     {
         <h2 class="resv-message">@ViewBag.Message</h2>
-    }
-</div>
-
-
-
-
-
-<div class="page">
-    @if (ViewBag.CurrentPage > 1)
-    {
-       <a class="page-link"
-          asp-controller="Home"
-           asp-action="StaticSites"
-           asp-route-name="Rezerwacje"
-          asp-route-pageNumber="@(ViewBag.CurrentPage - 1)">
-           Poprzednia
-       </a>
-
-    }
-
-    <span class="current-page">
-        Strona @ViewBag.CurrentPage z @ViewBag.TotalPages
-    </span>
-
-    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-    {
-
-        <a class="page-link"
-           asp-controller="Home"
-           asp-action="StaticSites"
-           asp-route-name="Rezerwacje"
-           asp-route-pageNumber="@(ViewBag.CurrentPage + 1)">
-            Nastepna
-        </a>      
     }
 </div>

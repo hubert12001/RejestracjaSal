@@ -128,7 +128,7 @@ namespace RejestracjaSal.Models
                 Console.WriteLine($"Reservation with ID {reservationId} not found.");
             }
         }
-
+        
         public int GetReservationIdByUserId(int userId)
         {
             var query = Reservations.Where(r => r.User_id == userId && r.Paid == false).FirstOrDefault();

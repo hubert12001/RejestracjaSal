@@ -129,20 +129,27 @@ namespace RejestracjaSal.Controllers
             }
             if (name == "Rezerwacje")
             {
-                int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
-                int reservationId = AppDbContext.GetReservationIdByUserId(userId); 
-                if(reservationId != 0)
-                {
-                    (object, int, float) pgreservation = AppDbContext.GetReservationsById(reservationId, pageSize, pageNumber);
-                    ViewBag.Reservation = pgreservation.Item1;
-                    ViewBag.CurrentPage = pageNumber;
-                    ViewBag.TotalPages = pgreservation.Item2;
-                    ViewBag.TotalPrice = pgreservation.Item3;
-                    ViewBag.ReservationId = reservationId;
+                if (Request.Cookies["login"] != null) {
+                    int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
+                    int reservationId = AppDbContext.GetReservationIdByUserId(userId);
+                    if (reservationId != 0)
+                    {
+                        (object, int, float) pgreservation = AppDbContext.GetReservationsById(reservationId, pageSize, pageNumber);
+                        ViewBag.Reservation = pgreservation.Item1;
+                        ViewBag.CurrentPage = pageNumber;
+                        ViewBag.TotalPages = pgreservation.Item2;
+                        ViewBag.TotalPrice = pgreservation.Item3;
+                        ViewBag.ReservationId = reservationId;
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Brak Rezerwacji";
+                    }
+
                 }
                 else
                 {
-                    ViewBag.Message = "Brak Rezerwacji";
+                    ViewBag.Message = "Musisz byc zalogowanym";
                 }
 
             }
@@ -161,6 +168,13 @@ namespace RejestracjaSal.Controllers
             Rooms room = AppDbContext.GetRoomById(roomid);
 
             string? cookie = Request.Cookies["login"];
+            string? roleCookie = Request.Cookies["roleId"];
+
+
+            if (roleCookie != null)
+            {
+                ViewBag.role = Request.Cookies["roleId"];
+            }
             if (cookie != null && AppDbContext.IsRoomAvaible(room.Room_id, startDate, endDate)==true)
             {
                 ViewBag.name = Request.Cookies["login"];
@@ -195,10 +209,15 @@ namespace RejestracjaSal.Controllers
         {
 
             string? cookie = Request.Cookies["login"];
+            string? roleCookie = Request.Cookies["roleId"];
 
             if (cookie != null)
             {
                 ViewBag.name = Request.Cookies["login"];
+            }
+            if (roleCookie == "3")
+            {
+                ViewBag.role = Request.Cookies["roleId"];
             }
 
 
