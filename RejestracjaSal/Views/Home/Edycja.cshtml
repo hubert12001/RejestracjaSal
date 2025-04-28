@@ -1,4 +1,4 @@
-﻿@if (ViewBag.role == "3")
+﻿@if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
 {
     <h2>Szczegóły użytkownika</h2>
 
@@ -21,7 +21,7 @@
     }
 }
 
-else if (ViewBag.role != "3")
+else if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "3")
 {
     <div class="no-access">
         <h1>Brak dostępu</h1>

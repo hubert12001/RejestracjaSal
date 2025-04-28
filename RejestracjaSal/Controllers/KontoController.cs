@@ -47,7 +47,7 @@ namespace RejestracjaSal.Controllers
                         Name = username,
                         Email = email,
                         Phone = phone,
-                        Role_id = 1,
+                        Role_id = 2,
                         Login = login,
                         Password = password
                     };

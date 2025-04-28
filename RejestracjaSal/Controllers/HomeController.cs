@@ -211,17 +211,7 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult Edycja(int id)
         {
-            string? cookie = Request.Cookies["login"];
-            string? roleCookie = Request.Cookies["roleId"];
 
-            if (cookie != null)
-            {
-                ViewBag.name = Request.Cookies["login"];
-            }
-            if (roleCookie == "3")
-            {
-                ViewBag.role = Request.Cookies["roleId"];
-            }
 
             var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == id);
 
