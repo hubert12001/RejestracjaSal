@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RejestracjaSal.Models;
 
@@ -11,9 +12,10 @@ using RejestracjaSal.Models;
 namespace RejestracjaSal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250428132439_cos_sie_dzieje")]
+    partial class cos_sie_dzieje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -478,8 +480,8 @@ namespace RejestracjaSal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<int>("Role_id")
                         .HasColumnType("int");
@@ -496,7 +498,7 @@ namespace RejestracjaSal.Migrations
                             Login = "Admin",
                             Name = "Admin",
                             Password = "Admin",
-                            Phone = "698785383",
+                            Phone = 698785383,
                             Role_id = 2
                         });
                 });

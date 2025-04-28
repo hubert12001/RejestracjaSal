@@ -246,6 +246,47 @@ namespace RejestracjaSal.Controllers
             ViewBag.Room = room;
             return View("Pokoj");
         }
+
+        public IActionResult Edycja(int id)
+        {
+            string? cookie = Request.Cookies["login"];
+            string? roleCookie = Request.Cookies["roleId"];
+
+            if (cookie != null)
+            {
+                ViewBag.name = Request.Cookies["login"];
+            }
+            if (roleCookie == "3")
+            {
+                ViewBag.role = Request.Cookies["roleId"];
+            }
+
+            var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.User = user;
+            return View("Edycja");
+        }
+
+        [HttpPost]
+        public IActionResult EdycjaPost(int User_id, string Name, string Email, string Phone )
+        {
+            var user = AppDbContext.Users.FirstOrDefault(u => u.User_id == User_id);
+            if (user != null)
+            {
+                user.Name = Name;
+                user.Email = Email;
+                user.Phone = Phone;
+                AppDbContext.SaveChanges();
+            }
+
+            return RedirectToAction("StaticSites", new { name = "Administrator" });
+        }
+
         public IActionResult BanUser(int id)
         {
 

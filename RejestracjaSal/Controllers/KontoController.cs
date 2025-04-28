@@ -43,7 +43,7 @@ namespace RejestracjaSal.Controllers
                     {
                         Name = username,
                         Email = email,
-                        Phone = Int32.Parse(phone),
+                        Phone = phone,
                         Role_id = 1,
                         Login = login,
                         Password = password

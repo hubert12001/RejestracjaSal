@@ -1,6 +1,24 @@
 ﻿@if (ViewBag.role == "3")
 {
-    <h2>Panel edycji</h2>
+    <h2>Szczegóły użytkownika</h2>
+
+    @if (ViewBag.User != null)
+    {
+        <form asp-action="EdycjaPost" asp-controller="Home" method="post">
+            <input type="hidden" name="User_id" value="@ViewBag.User.User_id" />
+
+            <label>Imię:</label>
+            <input type="text" name="Name" value="@ViewBag.User.Name" />
+            
+            <label>Email:</label>
+            <input type="email" name="Email" value="@ViewBag.User.Email" />
+
+            <label>Numer telefonu:</label>
+            <input type="number" name="Number" value="@ViewBag.User.Phone" />
+
+            <button type="submit">Zapisz zmiany</button>
+        </form>
+    }
 }
 
 else if (ViewBag.role != "3")

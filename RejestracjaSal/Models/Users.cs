@@ -8,7 +8,7 @@ namespace RejestracjaSal.Models
         public int User_id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public int? Phone { get; set; }
+        public string? Phone { get; set; }
         public int Role_id { get; set; }
         public string Login{ get; set; }
         public string Password {  get; set; }
