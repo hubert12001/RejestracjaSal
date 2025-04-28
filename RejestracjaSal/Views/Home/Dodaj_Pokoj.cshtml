@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Panel Administratora - Dodaj Pokój";
+}
+
+@if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
+{
+
+    <div class="edit-panel">
+        <form asp-action="DodajPokojPost" asp-controller="Home" method="post" class="edycja">
+            <h2>Dodaj nowy pokój</h2>
+            <label>Nazwa:</label>
+            <input type="text" name="Name" required />
+
+            <label>Ilość miejsc:</label>
+            <input type="number" name="Capacity" required />
+
+            <label>Opis:</label>
+            <textarea class="edit-description" name="Description"></textarea>
+
+            <label>Cena:</label>
+            <input type="number" step="0.01" name="Room_price" required />
+
+            <label>Typ pokoju (ID typu):</label>
+            <input type="number" name="Type_id" required />
+
+            <label>Lokalizacja (ID lokalizacji):</label>
+            <input type="number" name="Location_id" required />
+
+            <label>Obraz (nazwa pliku lub URL):</label>
+            <input type="text" name="Image" required />
+
+            <button type="submit">Dodaj pokój</button>
+        </form>
+    </div>
+    
+}
+else
+{
+    <div class="no-access">
+        <h1>Brak dostępu</h1>
+        <p>Nie masz uprawnień do wyświetlania tego panelu.</p>
+    </div>
+}

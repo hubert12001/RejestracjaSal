@@ -5,7 +5,7 @@
 
         @if (ViewBag.User != null)
         {
-            <form asp-action="EdycjaUzytkownicyPost" asp-controller="Home" method="post">
+            <form asp-action="EdycjaUzytkownicyPost" asp-controller="Home" method="post" class="edycja">
                 <input type="hidden" name="User_id" value="@ViewBag.User.User_id" />
 
                 <label>Imię:</label>

@@ -14,20 +14,20 @@
     color: var(--200);
 }
 
-form {
+.edycja {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-form label {
+.edycja label {
     font-size: 14px;
     font-weight: bold;
     color: #555;
 }
 
-form input,
-form select {
+.edycja input,
+.edycja select {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -36,14 +36,14 @@ form select {
     background-color: #f9f9f9;
 }
 
-form input:focus,
-form select:focus {
+.edycja input:focus,
+.edycja select:focus {
     border-color: var(--200);
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
 }
 
-form button {
-    background-color: #3498db;
+.edycja button {
+    background-color: var(-200);
     padding: 10px 20px;
     border-radius: 8px;
     color: white;
@@ -52,25 +52,17 @@ form button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    margin: auto;
 }
 
-form button:hover {
-    background-color: #2980b9;
+.edycja button:hover {
+    background-color: var(-300);
+    color: white;
 }
 
-.no-access {
-    max-width: 600px;
-    margin: 100px auto;
-    text-align: center;
-    color: #e74c3c;
+.edit-description {
+    border: 1px solid var(--300);
+    border-radius: 10px;
+    min-height: 5rem;
+    min-width: 25rem;
 }
-
-.no-access h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.no-access p {
-    font-size: 18px;
-}
-

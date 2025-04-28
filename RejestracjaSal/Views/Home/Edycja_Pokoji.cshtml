@@ -1,0 +1,34 @@
+﻿@if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
+{
+    <div class="edit-panel">
+        <h2>Szczegóły pokoju</h2>
+
+        @if (ViewBag.Room != null)
+        {
+            <form asp-action="EdycjaPokojiPost" asp-controller="Home" method="post" class="edycja">
+                <input type="hidden" name="Room_id" value="@ViewBag.Room.Room_id" />
+
+                <label>Nazwa:</label>
+                <input type="text" name="Name" value="@ViewBag.Room.Name" />
+
+                <label>Ilość miejsc:</label>
+                <input type="text" name="Capacity" value="@ViewBag.Room.Capacity" />
+
+                <label>Opis:</label>
+                <textarea class="edit-description" name="Description">@ViewBag.Room.Description</textarea>
+
+                <label>Cena:</label>
+                <input type="text" name="Room_price" value="@ViewBag.Room.Room_price" />
+
+                <button type="submit">Zapisz zmiany</button>
+            </form>
+        }
+    </div>
+}
+else if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "3")
+{
+    <div class="no-access">
+        <h1>Brak dostępu</h1>
+        <p>Nie masz uprawnień do wyświetlania tego panelu.</p>
+    </div>
+}

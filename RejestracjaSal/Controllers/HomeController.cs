@@ -278,6 +278,21 @@ namespace RejestracjaSal.Controllers
 
             return RedirectToAction("StaticSites", new { name = "Admin_Uzytkownicy" });
         }
+        [HttpPost]
+        public IActionResult EdycjaPokojiPost(int Room_id, string Name, int Capacity, string Description, float Room_price)
+        {
+            var room = AppDbContext.Rooms.FirstOrDefault(r => r.Room_id == Room_id);
+            if (room != null)
+            {
+                room.Name = Name;
+                room.Capacity = Capacity;
+                room.Description = Description;
+                room.Room_price = Room_price;
+                AppDbContext.SaveChanges();
+            }
+
+            return RedirectToAction("StaticSites", new { name = "Admin_Pokoje" });
+        }
 
         public IActionResult BanUser(int id)
         {
@@ -300,6 +315,37 @@ namespace RejestracjaSal.Controllers
                 AppDbContext.SaveChanges();
             }
             return RedirectToAction("StaticSites", new { name = "Admin_Uzytkownicy" });
+        }
+
+        public IActionResult UsunPokoj(int id)
+        {
+            var room = AppDbContext.Rooms.FirstOrDefault(r => r.Room_id == id);
+            if (room != null)
+            {
+                AppDbContext.Rooms.Remove(room);
+                AppDbContext.SaveChanges();
+            }
+            return RedirectToAction("StaticSites", new { name = "Admin_Pokoje" });
+        }
+
+        [HttpPost]
+        public IActionResult DodajPokojPost(string Name, int Capacity, int Location_id, int Type_id, float Room_price, string Description, string Image)
+        {
+            var newRoom = new Rooms
+            {
+                Name = Name,
+                Capacity = Capacity,
+                Location_id = Location_id,
+                Type_id = Type_id,
+                Room_price = Room_price,
+                Description = Description,
+                Image = Image
+            };
+
+            AppDbContext.Rooms.Add(newRoom);
+            AppDbContext.SaveChanges();
+
+            return RedirectToAction("StaticSites", new { name = "Admin_Pokoje" });
         }
 
     }
