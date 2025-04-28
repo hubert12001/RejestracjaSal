@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using RejestracjaSal.Models;
 using System.Drawing.Printing;
+using System.Security.Claims;
 
 namespace RejestracjaSal.Controllers
 {
@@ -28,7 +31,7 @@ namespace RejestracjaSal.Controllers
 
 
         [HttpPost]
-        public IActionResult Register(string login, string password, string repeatPassword,
+        public async Task<IActionResult> Register(string login, string password, string repeatPassword,
                                      string email, string username, string phone)
         {
             Users newUser;
@@ -44,7 +47,7 @@ namespace RejestracjaSal.Controllers
                         Name = username,
                         Email = email,
                         Phone = Int32.Parse(phone),
-                        Role_id = 1,
+                        Role_id = 2,
                         Login = login,
                         Password = password
                     };
@@ -55,7 +58,7 @@ namespace RejestracjaSal.Controllers
                     {
                         Name = username,
                         Email = email,
-                        Role_id = 1,
+                        Role_id = 2,
                         Login = login,
                         Password = password
                     };
@@ -67,8 +70,18 @@ namespace RejestracjaSal.Controllers
                 ViewBag.TotalPages = pgroom.Item2;
                 AppDbContext.Users.Add(newUser);
                 AppDbContext.SaveChanges();
-                Response.Cookies.Append("login", newUser.Name, options);
-                ViewBag.name = Request.Cookies["login"];
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, newUser.Name),
+                    new Claim(ClaimTypes.Role, newUser.Role_id.ToString()),
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();
@@ -82,7 +95,7 @@ namespace RejestracjaSal.Controllers
 
         }
         [HttpPost]
-        public IActionResult Login(string login, string password)
+        public async Task<IActionResult> Login(string login, string password)
         {
             IQueryable<Users> myUsers = from user in AppDbContext.Users
                                         where user.Login == login && user.Password == password
@@ -95,31 +108,40 @@ namespace RejestracjaSal.Controllers
                 ViewBag.CurrentPage = 1;
                 ViewBag.TotalPages = pgroom.Item2;
 
-                Response.Cookies.Append("login", users.Name, options);
-                Response.Cookies.Append("roleId", users.Role_id.ToString(), options);
-                ViewBag.name = users.Name;
-                ViewBag.role = users.Role_id.ToString();
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, users.Name),
+                    new Claim(ClaimTypes.Role, users.Role_id.ToString()),
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();
                 ViewBag.RoomTypes = types;
                 ViewBag.Locations = locations;
-                return View("/Views/Home/StronaGlowna.cshtml");
+                return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
             }
             else
             {
                 ViewBag.message = "Konto o Podanym loginie i haśle nie istnieje";
-                return View("/Views/Home/Logowanie.cshtml");
+                return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
             }
         }
 
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            Response.Cookies.Delete("login", options);
-            Response.Cookies.Delete("roleId", options);
-            return View("/Views/Home/Logowanie.cshtml");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+ 
+
+            return RedirectToAction("StaticSites", "Home", new { name = "Logowanie" });
         }
 
         public IActionResult StronaGlowna()

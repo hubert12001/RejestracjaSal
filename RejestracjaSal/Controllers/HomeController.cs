@@ -57,11 +57,7 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult FindRoom(string find, int min, int max, string local, int capacity, string type, int pageNumber = 1, int pageSize = 12)
         {
-            string? cookie = Request.Cookies["login"];
-            if (cookie != null)
-            {
-                ViewBag.name = Request.Cookies["login"];
-            }
+
             Console.WriteLine($"To jest lokal{local}");
             (object, int) pgroom = AppDbContext.FindRooms(pageSize, pageNumber, find, min, max, local, capacity, type);
 
@@ -88,31 +84,16 @@ namespace RejestracjaSal.Controllers
 
         public IActionResult Pay(int reservationId)
         {
-            Console.WriteLine($"PAYPAYPAYPAYP {reservationId}.");
             AppDbContext.ReservationSetPaid(reservationId);
             return RedirectToAction("StaticSites", new { name = "Rezerwacje", pageNumber = 1, pageSize = 12 });
         }
         public IActionResult DeleteReservation(int reservationId)
         {
-            Console.WriteLine($"DELELELDELDELDEDE {reservationId} not found.");
             AppDbContext.DeleteReservationById(reservationId);
             return RedirectToAction("StaticSites", new { name = "Rezerwacje", pageNumber = 1, pageSize = 12 });
         }
         public IActionResult StaticSites(string name, int pageNumber = 1, int pageSize = 12)
         {
-
-            string? roleCookie = Request.Cookies["roleId"];
-            string? cookie = Request.Cookies["login"];
-
-            if (cookie != null)
-            {
-                ViewBag.name = Request.Cookies["login"];
-            }
-
-            if (roleCookie != null)
-            {
-                ViewBag.role = Request.Cookies["roleId"];
-            }
 
             if (name == "StronaGlowna")
             {
@@ -129,7 +110,7 @@ namespace RejestracjaSal.Controllers
             }
             if (name == "Rezerwacje")
             {
-                if (Request.Cookies["login"] != null) {
+                if (User.Identity.IsAuthenticated == true) {
                     int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
                     int reservationId = AppDbContext.GetReservationIdByUserId(userId);
                     if (reservationId != 0)
@@ -167,17 +148,9 @@ namespace RejestracjaSal.Controllers
         {
             Rooms room = AppDbContext.GetRoomById(roomid);
 
-            string? cookie = Request.Cookies["login"];
-            string? roleCookie = Request.Cookies["roleId"];
-
-
-            if (roleCookie != null)
+            if (User.Identity.IsAuthenticated == true && AppDbContext.IsRoomAvaible(room.Room_id, startDate, endDate)==true)
             {
-                ViewBag.role = Request.Cookies["roleId"];
-            }
-            if (cookie != null && AppDbContext.IsRoomAvaible(room.Room_id, startDate, endDate)==true)
-            {
-                ViewBag.name = Request.Cookies["login"];
+ 
 
 
                 int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
@@ -208,17 +181,6 @@ namespace RejestracjaSal.Controllers
         public IActionResult Pokoj(int id)
         {
 
-            string? cookie = Request.Cookies["login"];
-            string? roleCookie = Request.Cookies["roleId"];
-
-            if (cookie != null)
-            {
-                ViewBag.name = Request.Cookies["login"];
-            }
-            if (roleCookie == "3")
-            {
-                ViewBag.role = Request.Cookies["roleId"];
-            }
 
 
             var room = (from Rooms in AppDbContext.Rooms

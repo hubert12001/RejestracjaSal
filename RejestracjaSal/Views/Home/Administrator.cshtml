@@ -2,7 +2,7 @@
     ViewData["Title"] = "Panel Administratora";
 }
 
-@if(ViewBag.role=="3")
+@if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
 {
     <div class="admin-panel">
         <h2>Panel Administratora</h2>
@@ -57,7 +57,7 @@
     </div>
 }
 
-else if(ViewBag.role!="3")
+else if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "3")
 {
     <div class="no-access">
         <h1>Brak dostępu</h1>

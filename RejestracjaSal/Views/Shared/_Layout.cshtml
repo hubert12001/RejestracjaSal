@@ -29,17 +29,16 @@
             </div>
             <div class="menu">
 
-                @if (ViewBag.role == "3")
+                @if (HttpContextAccessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value == "3")
                 {
                     <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Administrator">Panel administratora</a>
                 }
                 <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
                 <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
                 <div class="account-menu">
-
-                        @if (ViewBag.name != null)
+                    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated == true)
                         {
-                            <span class="mojeKonto">@ViewBag.name</span>
+                        <span class="mojeKonto">@HttpContextAccessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value</span>
                             <div class="account-dropdown">
                                 <a asp-controller="Konto" asp-action="Logout">Wyloguj</a>
                             </div>
