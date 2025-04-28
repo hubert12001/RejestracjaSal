@@ -66,7 +66,33 @@ namespace RejestracjaSal.Models
             (object, int) result = (pagedRooms, totalPages);
             return result;
         }
-
+        public bool FindLogin(string login)
+        {
+            var query = Users.Where(u => u.Login == login).FirstOrDefault();
+            if(query != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool FindEmail(string email)
+        {
+            var query = Users.Where(u => u.Email == email).FirstOrDefault();
+            if (query != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool FindPhone(string phone)
+        {
+            var query = Users.Where(u => u.Phone == phone).FirstOrDefault();
+            if (query != null)
+            {
+                return true;
+            }
+            return false;
+        }
         public List<string> GetTypes()
         {
             var query = from roomTypes in RoomTypes select roomTypes.Name;

@@ -1,0 +1,49 @@
+﻿.zbanowany-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styl dla głównego komunikatu */
+.zbanowany-message {
+    text-align: center;
+    background-color: #f44336; /* Kolor tła komunikatu (czerwony) */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+    /* Styl nagłówka */
+    .zbanowany-message h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Styl dla przycisku powrotu */
+    .zbanowany-message .back-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: #f44336;
+        border: 2px solid #f44336;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .zbanowany-message .back-button:hover {
+        background-color: #f44336;
+        color: white;
+    }

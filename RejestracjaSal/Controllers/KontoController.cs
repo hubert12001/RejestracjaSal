@@ -31,6 +31,7 @@ namespace RejestracjaSal.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(string login, string password, string repeatPassword,
                                      string email, string username, string phone)
         {
@@ -40,58 +41,95 @@ namespace RejestracjaSal.Controllers
 
             if (password == repeatPassword)
             {
-                if (phone != null)
+                if(!AppDbContext.FindLogin(login))
                 {
-                    newUser = new Users
+                    if (!AppDbContext.FindEmail(email))
                     {
-                        Name = username,
-                        Email = email,
-                        Phone = phone,
-                        Role_id = 2,
-                        Login = login,
-                        Password = password
-                    };
+                        if (!AppDbContext.FindPhone(phone) && phone != null)
+                        {
+                            newUser = new Users
+                            {
+                                Name = username,
+                                Email = email,
+                                Phone = phone,
+                                Role_id = 2,
+                                Login = login,
+                                Password = password
+                            };
+
+
+                            (object, int) pgroom = AppDbContext.FindRooms(12, 1);
+                            ViewBag.Rooms = pgroom.Item1;
+                            ViewBag.CurrentPage = 1;
+                            ViewBag.TotalPages = pgroom.Item2;
+                            AppDbContext.Users.Add(newUser);
+                            AppDbContext.SaveChanges();
+
+                            var claims = new List<Claim>
+                            {
+                                new Claim(ClaimTypes.Name, newUser.Name),
+                                new Claim(ClaimTypes.Role, newUser.Role_id.ToString()),
+                            };
+
+                            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                            var principal = new ClaimsPrincipal(identity);
+
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                            List<string> types = AppDbContext.GetTypes();
+                            List<string> locations = AppDbContext.GetLocations();
+                            ViewBag.RoomTypes = types;
+                            ViewBag.Locations = locations;
+                            return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
+                        }
+                        else if (phone == null)
+                        {
+                            newUser = new Users
+                            {
+                                Name = username,
+                                Email = email,
+                                Role_id = 2,
+                                Login = login,
+                                Password = password
+                            };
+
+                            (object, int) pgroom = AppDbContext.FindRooms(12, 1);
+                            ViewBag.Rooms = pgroom.Item1;
+                            ViewBag.CurrentPage = 1;
+                            ViewBag.TotalPages = pgroom.Item2;
+                            AppDbContext.Users.Add(newUser);
+                            AppDbContext.SaveChanges();
+
+                            var claims = new List<Claim>
+                            {
+                                new Claim(ClaimTypes.Name, newUser.Name),
+                                new Claim(ClaimTypes.Role, newUser.Role_id.ToString()),
+                            };
+
+                            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                            var principal = new ClaimsPrincipal(identity);
+
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                            List<string> types = AppDbContext.GetTypes();
+                            List<string> locations = AppDbContext.GetLocations();
+                            ViewBag.RoomTypes = types;
+                            ViewBag.Locations = locations;
+                            return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
+                        }
+                        TempData["message"] = "Podany telefon jest zajęty";
+                        return RedirectToAction("StaticSites", "Home", new { name = "Rejestracja" });
+                    }
+                    TempData["message"] = "Podany email jest zajęty";
+                    return RedirectToAction("StaticSites", "Home", new { name = "Rejestracja" });
                 }
-                else
-                {
-                    newUser = new Users
-                    {
-                        Name = username,
-                        Email = email,
-                        Role_id = 2,
-                        Login = login,
-                        Password = password
-                    };
-                }
-
-                (object, int) pgroom = AppDbContext.FindRooms(12, 1);
-                ViewBag.Rooms = pgroom.Item1;
-                ViewBag.CurrentPage = 1;
-                ViewBag.TotalPages = pgroom.Item2;
-                AppDbContext.Users.Add(newUser);
-                AppDbContext.SaveChanges();
-
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, newUser.Name),
-                    new Claim(ClaimTypes.Role, newUser.Role_id.ToString()),
-                };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var principal = new ClaimsPrincipal(identity);
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                List<string> types = AppDbContext.GetTypes();
-                List<string> locations = AppDbContext.GetLocations();
-                ViewBag.RoomTypes = types;
-                ViewBag.Locations = locations;
-                return View("/Views/Home/StronaGlowna.cshtml");
+                TempData["message"] = "Podany login już istnieje";
+                return RedirectToAction("StaticSites", "Home", new { name = "Rejestracja" });
             }
-
-            ViewBag.message = "Hasła się niezgadzają";
-            return View("/Views/Home/Rejestracja.cshtml");
+            TempData["message"] = "Hasła się niezgadzają";
+            return RedirectToAction("StaticSites", "Home", new { name = "Rejestracja" });
 
         }
         [HttpPost]
@@ -101,7 +139,7 @@ namespace RejestracjaSal.Controllers
                                         where user.Login == login && user.Password == password
                                         select user;
             Users users = myUsers.FirstOrDefault();
-            if (myUsers.Any())
+            if (myUsers.Any() && users.Role_id!= 1)
             {
                 (object, int) pgroom = AppDbContext.FindRooms(12, 1);
                 ViewBag.Rooms = pgroom.Item1;
@@ -124,14 +162,31 @@ namespace RejestracjaSal.Controllers
                 List<string> types = AppDbContext.GetTypes();
                 List<string> locations = AppDbContext.GetLocations();
                 ViewBag.RoomTypes = types;
-                ViewBag.Locations = locations;
+                ViewBag.Locations = locations;            
                 return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
             }
-            else
+            else if(users.Role_id == 1)
             {
-                ViewBag.message = "Konto o Podanym loginie i haśle nie istnieje";
-                return RedirectToAction("StaticSites", "Home", new { name = "StronaGlowna" });
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, users.Name),
+                    new Claim(ClaimTypes.Role, users.Role_id.ToString()),
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                return RedirectToAction("StaticSites", "Home", new { name = "Banned" });
             }
+            else if(myUsers.Any() == false)
+            {
+                TempData["message"] = "Konto o Podanym loginie i haśle nie istnieje";
+                return RedirectToAction("StaticSites", "Home", new { name = "Logowanie" });
+            }
+            return RedirectToAction("StaticSites", "Home", new { name = "Logowanie" });
         }
 
 

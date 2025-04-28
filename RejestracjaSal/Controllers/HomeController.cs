@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RejestracjaSal.Models;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Security.Claims;
 using System.Xml.Linq;
 
 namespace RejestracjaSal.Controllers
@@ -111,7 +112,7 @@ namespace RejestracjaSal.Controllers
             if (name == "Rezerwacje")
             {
                 if (User.Identity.IsAuthenticated == true) {
-                    int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
+                    int userId = AppDbContext.GetUserIdByName(User.FindFirst(ClaimTypes.Name)?.Value);
                     int reservationId = AppDbContext.GetReservationIdByUserId(userId);
                     if (reservationId != 0)
                     {
@@ -153,30 +154,49 @@ namespace RejestracjaSal.Controllers
  
 
 
-                int userId = AppDbContext.GetUserIdByName(Request.Cookies["login"]);
+                int userId = AppDbContext.GetUserIdByName(User.FindFirst(ClaimTypes.Name)?.Value);
                 AppDbContext.NewReservation(userId, room.Room_id, room.Room_price, startDate, endDate);
-            }
 
-            var room1 = (from Rooms in AppDbContext.Rooms
-                        join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
-                        join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
-                        where Rooms.Room_id == roomid
-                        select new
-                        {
-                            id = Rooms.Room_id,
-                            name = Rooms.Name,
-                            price = Rooms.Room_price,
-                            capacity = Rooms.Capacity,
-                            description = Rooms.Description,
-                            image = Rooms.Image,
-                            type = RoomTypes.Name,
-                            location = Locations.Name,
-                        }).FirstOrDefault();
+                ViewBag.message = "Rezerwacja zapisana";
+            }
+            else
+            {
+                ViewBag.message = "Sala zajêta";
+            }
+                var room1 = (from Rooms in AppDbContext.Rooms
+                             join RoomTypes in AppDbContext.RoomTypes on Rooms.Type_id equals RoomTypes.Type_id
+                             join Locations in AppDbContext.Locations on Rooms.Location_id equals Locations.Location_id
+                             where Rooms.Room_id == roomid
+                             select new
+                             {
+                                 id = Rooms.Room_id,
+                                 name = Rooms.Name,
+                                 price = Rooms.Room_price,
+                                 capacity = Rooms.Capacity,
+                                 description = Rooms.Description,
+                                 image = Rooms.Image,
+                                 type = RoomTypes.Name,
+                                 location = Locations.Name,
+                             }).FirstOrDefault();
 
             ViewBag.Room = room1;
             return View("Pokoj");
         }
+        [HttpGet]
+        public IActionResult GetAll(int roomId)
+        {
+            var events = AppDbContext.ReservationsRooms
+                .Where(r => r.Room_id == roomId)
+                .Select(r => new {
+                    title = "Zajête",              
+                    start = r.Reservation_start_date.ToString("s"), // ISO-format
+                    end = r.Reservation_end_date.ToString("s"),
+                    display = "background"            
+                })
+                .ToList();
 
+            return Json(events);
+        }
 
         public IActionResult Pokoj(int id)
         {

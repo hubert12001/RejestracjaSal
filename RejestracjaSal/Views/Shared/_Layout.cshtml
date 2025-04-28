@@ -13,6 +13,7 @@
     <link href="~/css/pokoj.css" rel="stylesheet" />
     <link href="~/css/administrator.css" rel="stylesheet" />
     <link href="~/css/rezerwacje.css" rel="stylesheet" />
+    <link href="~/css/banned.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="~/js/site.js"></script>
 
@@ -23,9 +24,17 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">
+
+                @if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "1")
+                {
+                    <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">
+                        <i class="fa-solid fa-house-laptop logoo"></i>
+                    </a>
+                }
+                else
+                {
                     <i class="fa-solid fa-house-laptop logoo"></i>
-                </a>
+                }
             </div>
             <div class="menu">
 
@@ -33,11 +42,16 @@
                 {
                     <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Administrator">Panel administratora</a>
                 }
-                <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
-                <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
+
+                @if (User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != "1")
+                {           
+                    <a asp-controller="Home" asp-action="StaticSites" asp-route-name="StronaGlowna">Strona główna</a>
+                    <a asp-controller ="Home" asp-action="StaticSites" asp-route-name="Rezerwacje">Moje rezerwacje</a>
+                }
                 <div class="account-menu">
                     @if (User.Identity.IsAuthenticated == true)
                         {
+
                         <span class="mojeKonto">@HttpContextAccessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value</span>
                             <div class="account-dropdown">
                                 <a asp-controller="Konto" asp-action="Logout">Wyloguj</a>

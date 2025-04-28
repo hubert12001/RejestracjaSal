@@ -5,6 +5,7 @@
 <div class="register-container">
     <h2>Zarejestruj się</h2>
     <form asp-controller="Konto" asp-action="Register" >
+        @Html.AntiForgeryToken()
         <label for="register" class="LogowanieLabel">Login</label>
         <input type="text" id="username" class="register" name="login" placeholder="Wpisz nazwę użytkownika" required />
 
@@ -26,6 +27,13 @@
         <button type="submit" class="zarejestruj">Zarejestruj</button>
         <p>Masz konto? <a asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie">Zaloguj się</a></p>
 
-        <p>@ViewBag.message</p>
+        @if (TempData["message"] != null)
+        {
+            <div class="alert-danger">
+                <b>
+                    @TempData["message"]
+                </b>
+            </div>
+        }
     </form>
 </div>

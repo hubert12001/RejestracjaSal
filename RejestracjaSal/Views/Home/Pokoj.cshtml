@@ -26,6 +26,26 @@
                 </ul>
             </div>
             <div class="booking-section">
+                @if (ViewBag.message != null)
+                {
+                    @if (ViewBag.message == "Sala zajęta")
+                    {
+                        <span class="alert-danger">
+                            <b>
+                                @ViewBag.message
+                            </b>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="alert-success">
+                            <b>
+                                @ViewBag.message
+                            </b>
+                        </span>
+                    }
+                }
+
                 <h3>Wybierz date rezerwacji:</h3>
                 <form asp-route-roomid="@ViewBag.Room.id" asp-controller="Home" asp-action="Reservation">
                     <input type="datetime-local" name="startDate"/>
@@ -43,37 +63,24 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const calendarEl = document.getElementById('calendar');
+                const roomId = @ViewBag.Room.id;  // id pokoju z ViewBag
 
                 const calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'timeGridWeek',
-                    selectable: true,
-                    select: function (info) {
-                        const start = info.startStr;
-                        const end = info.endStr;
+                    selectable: false,
 
-                        if (confirm(`Zarezerwować salę od ${start} do ${end}?`)) {
-                            fetch('/Reservation/Create', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    start: start,
-                                    end: end,
-                                    roomId: 1 // przykładowy ID sali
-                                })
-                            })
-                                .then(response => {
-                                    if (response.ok) {
-                                        alert("Zarezerwowano!");
-                                        calendar.refetchEvents();
-                                    } else {
-                                        alert("Błąd przy rezerwacji.");
-                                    }
-                                });
+                    // → źródło wydarzeń z dodatkowym parametrem roomId
+                    events: {
+                        url: '/Home/GetAll',
+                        method: 'GET',
+                        extraParams: {
+                            roomId: roomId
                         }
                     },
-                    events: '/Reservation/GetAll', // Endpoint zwracający już istniejące rezerwacje
+
+                    // nie pozwól na zaznaczenie (select) tam, gdzie jest już event
+                    selectOverlap: false,
+
                 });
 
                 calendar.render();
