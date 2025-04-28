@@ -1,0 +1,76 @@
+﻿.edit-panel {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.edit-panel h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--200);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input,
+form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f9f9f9;
+}
+
+form input:focus,
+form select:focus {
+    border-color: var(--200);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+form button {
+    background-color: #3498db;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+.no-access {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    color: #e74c3c;
+}
+
+.no-access h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.no-access p {
+    font-size: 18px;
+}
+
