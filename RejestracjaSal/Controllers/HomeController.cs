@@ -147,6 +147,27 @@ namespace RejestracjaSal.Controllers
                 List<Rooms> room = AppDbContext.GetRooms();
                 ViewBag.Rooms = room;
             }
+            if (name == "Admin_Rezerwacje")
+            {
+                var reservations = (from rr in AppDbContext.ReservationsRooms
+                                    join res in AppDbContext.Reservations on rr.Reservation_id equals res.Reservation_id
+                                    join u in AppDbContext.Users on res.User_id equals u.User_id
+                                    join r in AppDbContext.Rooms on rr.Room_id equals r.Room_id
+                                    select new
+                                    {
+                                        ReservationId = rr.Reservation_id,
+                                        UserName = u.Name,
+                                        UserEmail = u.Email,
+                                        RoomName = r.Name,
+                                        StartDate = rr.Reservation_start_date,
+                                        EndDate = rr.Reservation_end_date,
+                                        Price = rr.Reservation_price
+                                    }).ToList();
+
+                ViewBag.AdminReservations = reservations;
+            }
+
+
 
 
             return View(name);
@@ -258,6 +279,18 @@ namespace RejestracjaSal.Controllers
             }
 
             ViewBag.Room = room;
+            return View("Edycja_Pokoji");
+        }
+        public IActionResult EdycjaRezerwacji(int id)
+        {
+            var reservation = AppDbContext.Rooms.FirstOrDefault(r => r.Room_id == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Room = reservation;
             return View("Edycja_Pokoji");
         }
 
