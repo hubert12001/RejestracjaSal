@@ -28,11 +28,16 @@
             <div class="booking-section">
                 @if (ViewBag.message != null)
                 {
-                    @if (ViewBag.message == "Sala zajęta")
+                    @if (ViewBag.message != "Rezerwacja zapisana")
                     {
                         <span class="alert-danger">
                             <b>
                                 @ViewBag.message
+                                <br />
+                                @if (ViewBag.message == "Aby zarezerwować sale")
+                                {
+                                    <a class ="alert-link" asp-controller="Home" asp-action="StaticSites" asp-route-name="Logowanie" class="back-link">Zaloguj się</a>
+                                }
                             </b>
                         </span>
                     }
@@ -68,7 +73,7 @@
                 const calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'timeGridWeek',
                     selectable: false,
-
+                    contentHeight: 'auto', // ← to zapobiega scrollowi
                     // → źródło wydarzeń z dodatkowym parametrem roomId
                     events: {
                         url: '/Home/GetAll',

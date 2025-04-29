@@ -166,7 +166,11 @@ namespace RejestracjaSal.Controllers
 
                 ViewBag.message = "Rezerwacja zapisana";
             }
-            else
+            else if (User.Identity.IsAuthenticated == false)
+            {
+                ViewBag.message = "Aby zarezerwowaæ sale";
+            }
+            else if (AppDbContext.IsRoomAvaible(room.Room_id, startDate, endDate) == false)
             {
                 ViewBag.message = "Sala zajêta";
             }
