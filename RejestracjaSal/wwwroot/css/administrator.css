@@ -1,4 +1,12 @@
-﻿body {
+﻿:root {
+    --100: #F2A172;
+    --200: #592B1B;
+    --300: #8C4A32;
+    --400: #D9805F;
+    --500: #F2F2F2;
+}
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f9f9f9;
     color: #333;
@@ -179,7 +187,7 @@ body {
 
 .card-icon {
     font-size: 40px;
-    color: #3498db;
+    color: var(--200);
     margin-bottom: 20px;
 }
 
@@ -196,7 +204,7 @@ body {
 
 /* Styl przycisków */
 .btn-action-admin {
-    background-color: #3498db;
+    background-color: var(--100);
     padding: 10px 20px;
     color: white;
     text-decoration: none;
@@ -207,5 +215,5 @@ body {
 }
 
 .btn-action-admin:hover {
-    background-color: #2980b9;
+    background-color: var(--400);
 }
