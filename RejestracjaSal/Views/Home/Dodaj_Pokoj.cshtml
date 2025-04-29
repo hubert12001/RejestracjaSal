@@ -6,7 +6,7 @@
 {
 
     <div class="edit-panel">
-        <form asp-action="DodajPokojPost" asp-controller="Home" method="post" class="edycja">
+        <form asp-action="DodajPokojPost" asp-controller="Home" method="post" enctype="multipart/form-data" class="edycja">
             <h2>Dodaj nowy pokój</h2>
             <label>Nazwa:</label>
             <input type="text" name="Name" required />
@@ -26,8 +26,8 @@
             <label>Lokalizacja (ID lokalizacji):</label>
             <input type="number" name="Location_id" required />
 
-            <label>Obraz (nazwa pliku lub URL):</label>
-            <input type="text" name="Image" required />
+            <label>Obraz (plik):</label>
+            <input type="file" name="ImageFile" required />
 
             <button type="submit">Dodaj pokój</button>
         </form>

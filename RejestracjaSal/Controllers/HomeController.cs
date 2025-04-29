@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RejestracjaSal.Models;
 using System.Diagnostics;
@@ -362,24 +363,60 @@ namespace RejestracjaSal.Controllers
         }
 
         [HttpPost]
-        public IActionResult DodajPokojPost(string Name, int Capacity, int Location_id, int Type_id, float Room_price, string Description, string Image)
+        public IActionResult DodajPokojPost(string Name, int Capacity, int Location_id, int Type_id, float Room_price, string Description, IFormFile ImageFile)
         {
-            var newRoom = new Rooms
+            if (ImageFile != null && ImageFile.Length > 0)
             {
-                Name = Name,
-                Capacity = Capacity,
-                Location_id = Location_id,
-                Type_id = Type_id,
-                Room_price = Room_price,
-                Description = Description,
-                Image = Image
-            };
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Static/", fileName);
 
-            AppDbContext.Rooms.Add(newRoom);
-            AppDbContext.SaveChanges();
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    ImageFile.CopyTo(stream);
+                }
+
+                var newRoom = new Rooms
+                {
+                    Name = Name,
+                    Capacity = Capacity,
+                    Location_id = Location_id,
+                    Type_id = Type_id,
+                    Room_price = Room_price,
+                    Description = Description,
+                    Image = fileName // zapisujemy nazwê pliku
+                };
+
+                AppDbContext.Rooms.Add(newRoom);
+                AppDbContext.SaveChanges();
+            }
 
             return RedirectToAction("StaticSites", new { name = "Admin_Pokoje" });
         }
+
+        [Authorize(Roles = "3")]
+        public IActionResult AnulujRezerwacje(int id)
+        {
+            var reservationRoom = AppDbContext.ReservationsRooms
+                .FirstOrDefault(rr => rr.Reservation_id == id);
+
+            if (reservationRoom != null)
+            {
+                AppDbContext.ReservationsRooms.Remove(reservationRoom);
+
+                var reservation = AppDbContext.Reservations
+                    .FirstOrDefault(r => r.Reservation_id == id);
+
+                if (reservation != null)
+                {
+                    AppDbContext.Reservations.Remove(reservation);
+                }
+
+                AppDbContext.SaveChanges();
+            }
+
+            return RedirectToAction("StaticSites", new { name = "Admin_Rezerwacje" });
+        }
+
 
     }
 }

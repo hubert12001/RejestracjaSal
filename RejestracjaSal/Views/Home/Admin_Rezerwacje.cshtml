@@ -32,7 +32,7 @@
                             <td>@r.EndDate.ToString("yyyy-MM-dd")</td>
                             <td>@r.Price zł</td>
                             <td>
-                                <a class="btn-action btn-ban" asp-controller="Home" asp-action="UsunPokoj" asp-route-id="@r.ReservationId">Anuluj</a>
+                                <a class="btn-action btn-ban" asp-controller="Home" asp-action="AnulujRezerwacje" asp-route-id="@r.ReservationId">Anuluj</a>
                             </td>
                         </tr>
                     }
